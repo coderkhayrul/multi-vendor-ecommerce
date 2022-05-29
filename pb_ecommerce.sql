@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 29, 2022 at 03:18 PM
+-- Generation Time: May 29, 2022 at 09:37 PM
 -- Server version: 8.0.29-0ubuntu0.20.04.3
 -- PHP Version: 7.4.3
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pb_ecommarce`
+-- Database: `pb_ecommerce`
 --
 
 -- --------------------------------------------------------
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` bigint UNSIGNED NOT NULL,
-  `category_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category_description` text COLLATE utf8mb4_unicode_ci,
-  `category_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `category_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_status` int NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -57,11 +57,11 @@ INSERT INTO `categories` (`id`, `category_name`, `category_slug`, `category_desc
 
 CREATE TABLE `failed_jobs` (
   `id` bigint UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -73,7 +73,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `migrations` (
   `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -88,7 +88,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2022_05_27_184338_create_categories_table', 2),
 (6, '2022_05_28_190228_create_sub_categories_table', 3),
-(7, '2022_05_28_202827_create_sliders_table', 4);
+(7, '2022_05_28_202827_create_sliders_table', 4),
+(10, '2022_05_29_170227_create_products_table', 5),
+(11, '2022_05_29_174533_create_vendors_table', 5);
 
 -- --------------------------------------------------------
 
@@ -97,8 +99,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -110,12 +112,38 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint UNSIGNED NOT NULL,
+  `vendor_id` int NOT NULL,
+  `category_id` int NOT NULL,
+  `sub_category_id` int NOT NULL,
+  `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_discount` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_discount_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_short_des` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_long_des` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_thumbnails` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_quantity` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -128,10 +156,10 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `sliders` (
   `id` bigint UNSIGNED NOT NULL,
-  `slider_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slider_description` text COLLATE utf8mb4_unicode_ci,
-  `slider_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slider_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slider_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slider_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `slider_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slider_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `slider_status` int NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -153,9 +181,9 @@ INSERT INTO `sliders` (`id`, `slider_title`, `slider_description`, `slider_image
 CREATE TABLE `sub_categories` (
   `id` bigint UNSIGNED NOT NULL,
   `category_id` int NOT NULL,
-  `sub_category_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sub_category_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sub_category_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sub_category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sub_category_slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sub_category_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sub_category_status` int NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -168,7 +196,11 @@ CREATE TABLE `sub_categories` (
 INSERT INTO `sub_categories` (`id`, `category_id`, `sub_category_name`, `sub_category_slug`, `sub_category_image`, `sub_category_status`, `created_at`, `updated_at`) VALUES
 (1, 2, 'clock', 'clock', NULL, 1, '2022-05-28 19:24:19', '2022-05-28 23:27:56'),
 (2, 1, 'Scarlet Bailey', 'scarlet-bailey', 'sub_cat1653791542.jpg', 1, '2022-05-28 14:00:32', '2022-05-28 20:32:22'),
-(4, 4, 'Imelda Murphy', 'imelda-murphy', 'sub_cat1653791504.jpg', 1, '2022-05-28 20:31:44', '2022-05-28 20:31:44');
+(4, 4, 'Imelda Murphy', 'imelda-murphy', 'sub_cat1653791504.jpg', 1, '2022-05-28 20:31:44', '2022-05-28 20:31:44'),
+(5, 1, 'Penelope Preston', 'penelope-preston', 'sub_cat1653855151.jpg', 1, '2022-05-29 14:12:31', '2022-05-29 14:12:31'),
+(6, 1, 'Dexter Landry', 'dexter-landry', 'sub_cat1653855170.jpg', 1, '2022-05-29 14:12:50', '2022-05-29 14:12:50'),
+(7, 3, 'Ima Patton', 'ima-patton', '', 1, '2022-05-29 15:25:44', '2022-05-29 15:25:44'),
+(8, 3, 'Adrienne Figueroa', 'adrienne-figueroa', '', 1, '2022-05-29 15:25:52', '2022-05-29 15:25:52');
 
 -- --------------------------------------------------------
 
@@ -178,11 +210,11 @@ INSERT INTO `sub_categories` (`id`, `category_id`, `sub_category_name`, `sub_cat
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -193,6 +225,36 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'admin@mail.com', NULL, '$2y$10$TarRNUGnfT024RRX45fvsOmG9P16MvSrBFDN5sIOLsg26hm8/YX0m', NULL, '2022-05-27 12:39:24', '2022-05-27 12:39:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendors`
+--
+
+CREATE TABLE `vendors` (
+  `id` bigint UNSIGNED NOT NULL,
+  `vendor_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vendor_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vendor_operator_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vendor_operator_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vendor_tin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vendor_tread_number` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vendor_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `vendor_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `vendor_office_address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `vendor_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `vendor_status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `vendors`
+--
+
+INSERT INTO `vendors` (`id`, `vendor_name`, `vendor_phone`, `vendor_operator_name`, `vendor_operator_phone`, `vendor_tin`, `vendor_tread_number`, `vendor_email`, `vendor_description`, `vendor_office_address`, `vendor_image`, `vendor_status`, `created_at`, `updated_at`) VALUES
+(2, 'Chadwick Andrews', '+1 (233) 626-9174', 'Akeem Middleton', '+1 (314) 713-3218', '53', '495', 'kybyxuv@mailinator.com', 'Quaerat qui velit di', 'Aliquip sed omnis nu', 'vendor1653851752.jpg', '1', '2022-05-29 12:52:28', '2022-05-29 13:15:52');
 
 --
 -- Indexes for dumped tables
@@ -232,6 +294,12 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sliders`
 --
 ALTER TABLE `sliders`
@@ -249,6 +317,12 @@ ALTER TABLE `sub_categories`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Indexes for table `vendors`
+--
+ALTER TABLE `vendors`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -270,7 +344,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -279,22 +353,34 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `sliders`
 --
 ALTER TABLE `sliders`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `vendors`
+--
+ALTER TABLE `vendors`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
