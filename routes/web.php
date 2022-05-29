@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Backend\VendorController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +26,20 @@ Route::get('/', [FrontendController::class, 'home'])->name('frontend.home');
 // <<============ ALL ROUTE FOR ADMIN ===============>>
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/',[ AdminController::class, 'dashboard' ])->name('admin.dashboard');
+
+     // VENDOY ROUTE LIST
+    Route::group(['prefix' => 'vendor'], function() {
+        Route::get('/',[ VendorController::class, 'index' ])->name('vendor.index');
+        Route::get('/create',[ VendorController::class, 'create' ])->name('vendor.create');
+        Route::post('/',[ VendorController::class, 'store' ])->name('vendor.store');
+        Route::get('/show/{id}',[ VendorController::class, 'show' ])->name('vendor.show');
+        Route::get('/edit/{id}',[ VendorController::class, 'edit' ])->name('vendor.edit');
+        Route::put('/{id}',[ VendorController::class, 'update' ])->name('vendor.update');
+        Route::get('/delete/{id}',[ VendorController::class, 'destroy' ])->name('vendor.destroy');
+
+        Route::get('/active/{id}',[ VendorController::class, 'active_status' ])->name('vendor.active');
+        Route::get('/deactive/{id}',[ VendorController::class, 'deactive_status' ])->name('vendor.deactive');
+    });
 
     // CATEGORY ROUTE LIST
     Route::group(['prefix' => 'category'], function() {
@@ -62,6 +78,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
         Route::get('/active/{id}',[ SliderController::class, 'active_status' ])->name('slider.active');
         Route::get('/deactive/{id}',[ SliderController::class, 'deactive_status' ])->name('slider.deactive');
+    });
+
+    // PRODUCT ROUTE LIST
+    Route::group(['prefix' => 'product'], function() {
+        Route::get('/',[ ProductController::class, 'index' ])->name('product.index');
+        Route::get('/create',[ ProductController::class, 'create' ])->name('product.create');
+        Route::post('/',[ ProductController::class, 'store' ])->name('product.store');
+        Route::get('/edit/{id}',[ ProductController::class, 'edit' ])->name('product.edit');
+        Route::put('/{id}',[ ProductController::class, 'update' ])->name('product.update');
+        Route::get('/delete/{id}',[ ProductController::class, 'destroy' ])->name('product.destroy');
+
+        Route::get('/active/{id}',[ ProductController::class, 'active_status' ])->name('product.active');
+        Route::get('/deactive/{id}',[ ProductController::class, 'deactive_status' ])->name('product.deactive');
     });
 });
 require __DIR__.'/auth.php';

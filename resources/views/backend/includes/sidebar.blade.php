@@ -13,6 +13,24 @@
             </li>
             <!-- br-menu-item -->
         <label class="sidebar-label pd-x-10 mg-t-25 mg-b-20 tx-light">Admin</label>
+        <!-- Vendor Route Start -->
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{ request()->is('admin/vendor*') ? 'active' : '' }}">
+                <i class="menu-item-icon icon ion-filing tx-20"></i>
+                <span class="menu-item-label">Vendor</span>
+            </a>
+            <!-- br-menu-link -->
+            <ul class="br-menu-sub">
+                <li class="sub-item">
+                    <a href="{{ route('vendor.index') }}" class="sub-link {{ Route::currentRouteName() == 'vendor.index' ? 'active' : '' }}">All Vendor</a>
+                </li>
+                <li class="sub-item">
+                    <a href="{{ route('vendor.create') }}" class="sub-link {{ Route::currentRouteName() == 'vendor.create' ? 'active' : '' }}">Add Vendor</a>
+                </li>
+            </ul>
+        </li>
+        <!-- Vendor Route End -->
+
         <!-- Category Route Start -->
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{ request()->is('admin/category*') ? 'active' : '' }}">
@@ -48,7 +66,7 @@
         </li>
         <!-- Sub Category Route End -->
 
-        <!-- Sub Category Route Start -->
+        <!-- Slider Route Start -->
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{ request()->is('admin/slider*') ? 'active' : '' }}">
                 <i class="menu-item-icon icon ion-filing tx-20"></i>
@@ -64,7 +82,32 @@
                 </li>
             </ul>
         </li>
-        <!-- Sub Category Route End -->
+        <!-- Slider Route End -->
+        <!-- Product Route Start -->
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{ request()->is('admin/product*') ? 'active' : '' }}">
+                <i class="menu-item-icon icon ion-filing tx-20"></i>
+                <span class="menu-item-label">Product</span>
+            </a>
+            <!-- br-menu-link -->
+            <ul class="br-menu-sub">
+                <li class="sub-item">
+                    <a href="{{ route('product.index') }}" class="sub-link {{ Route::currentRouteName() == 'product.index' ? 'active' : '' }}">All Product</a>
+                </li>
+                <li class="sub-item">
+                    <a href="{{ route('product.create') }}" class="sub-link {{ Route::currentRouteName() == 'product.create' ? 'active' : '' }}">Add Create</a>
+                </li>
+            </ul>
+        </li>
+        <!-- Product Route End -->
+        <!-- Visite Website -->
+        <li class="br-menu-item">
+            <a href="{{ route('frontend.home') }}" class="br-menu-link" target="_blank">
+                <i class="menu-item-icon icon ion-ios-home-outline tx-24"></i>
+                <span class="menu-item-label">Visite Website</span>
+            </a>
+            <!-- br-menu-link -->
+        </li>
     </div>
     <!-- br-sideleft -->
     <!-- ########## END: LEFT PANEL ########## -->
