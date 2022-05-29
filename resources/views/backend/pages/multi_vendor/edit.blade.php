@@ -3,12 +3,11 @@
 
 <div class="card">
     <div class="card-header">
-        <p style="float:left" class="d-inline mb-0">Slider Edit</p>
-        <a style="float:right" class="d-inline btn btn-sm btn-primary" href="{{ route('slider.index') }}">All
-            Slider</a>
+        <p style="float:left" class="d-inline mb-0">Vendor Edit</p>
+        <a style="float:right" class="d-inline btn btn-sm btn-primary" href="{{ route('vendor.index') }}">All
+            Vendor</a>
     </div>
     <div class="card-body">
-
         @if (Session::has('success'))
             <div class="alert alert-success" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -26,63 +25,128 @@
             </div>
         @endif
 
-        <form action="{{ route('slider.update',$data->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('vendor.update',$data->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-layout form-layout-1">
                 <div class="row mg-b-25">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label">Slider Title: <span class="tx-danger">*</span></label>
-                            <input value="{{ $data->slider_title }}" class="form-control" type="text" name="slider_title" placeholder="Slider Title">
-                            @error('slider_title')
+                            <label class="form-control-label">Vendor Name: <span class="tx-danger">*</span></label>
+                            <input value="{{ $data['vendor_name'] }}" class="form-control" type="text" name="vendor_name" placeholder="Vendor Name">
+                            @error('vendor_name')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                    </div>
-                    <!-- col-4 -->
+                    </div><!-- col-4 -->
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label">Slider Link: <span class="tx-danger">*</span></label>
-                            <input value="{{ $data->slider_link }}" class="form-control" type="text" name="slider_link" placeholder="Slider Link">
-                            @error('slider_link')
+                            <label class="form-control-label">Vendor Email: <span class="tx-danger">*</span></label>
+                            <input value="{{ $data['vendor_email'] }}" class="form-control" type="text" name="vendor_email" placeholder="Email Address">
+                            @error('vendor_email')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                    </div>
-                    <!-- col-4 -->
+                    </div><!-- col-4 -->
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label">Vendor Phone: <span class="tx-danger">*</span></label>
+                            <input value="{{ $data['vendor_phone'] }}" class="form-control" type="text" name="vendor_phone" placeholder="Vendor Phone">
+                            @error('vendor_phone')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div><!-- col-4 -->
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label">Vendor Operator Name: <span class="tx-danger">*</span></label>
+                            <input value="{{ $data['vendor_operator_name'] }}" class="form-control" type="text" name="vendor_operator_name" placeholder="Vendor Operator Name">
+                            @error('vendor_operator_name')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div><!-- col-4 -->
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label">Vendor Operator Phone: <span class="tx-danger">*</span></label>
+                            <input value="{{ $data['vendor_operator_phone'] }}" class="form-control" type="text" name="vendor_operator_phone" placeholder="Vendor Operator Phone">
+                            @error('vendor_operator_phone')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div><!-- col-4 -->
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label">Vendor Tin Number: <span class="tx-danger">*</span></label>
+                            <input value="{{ $data['vendor_tin'] }}" class="form-control" type="number" name="vendor_tin" placeholder="Vendor Tin Number">
+                            @error('vendor_tin')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div><!-- col-4 -->
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label">Vendor Tread Number: <span class="tx-danger">*</span></label>
+                            <input value="{{ $data['vendor_tread_number'] }}" class="form-control" type="text" name="vendor_tread_number" placeholder="Vendor Tread Number">
+                            @error('vendor_tread_number')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div><!-- col-4 -->
 
                     <div class="col-lg-4">
                         <div class="form-group mg-b-10-force">
-                            <label class="form-control-label">Slider Image: <span class="tx-danger">*</span></label>
-                            <input id="slider_image_input" type="file" class="form-control" name="slider_image">
-                            @error('slider_image')
+                            <label class="form-control-label">Vendor Image: </label>
+                            <input id="vendor_image_input" type="file" class="form-control" name="vendor_image">
+                            @error('vendor_image')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div><!-- col-4 -->
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-2">
                         <div class="form-group mg-b-10-force text-center">
-                            @if ($data->slider_image)
-                                <img id="slider_image_preview" class=" img-fluid rounded wd-100" src="{{ asset('backend/uploads/slider/'.$data->slider_image) }}"
-                                alt="slider_image">
+                            @if ($data->vendor_image)
+                            <img id="vendor_image_preview" class="img-fluid rounded wd-80" src="{{ asset('backend/uploads/vendor/'.$data->vendor_image) }}"
+                            alt="vendor_image">
                             @else
-                                <img id="slider_image_preview" class=" img-fluid rounded wd-80" src="{{ asset('backend/default/no-image-pro.png') }}"
-                                alt="slider">
+                            <img id="vendor_image_preview" class="img-fluid rounded wd-80" src="{{ asset('backend/default/no-image-pro.png') }}"
+                            alt="vendor_image">
                             @endif
                         </div><!-- col-4 -->
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group mg-b-10-force">
-                            <label class="form-control-label">Description: <span class="tx-danger">*</span></label>
-                            <textarea class="form-control" name="slider_description" id="" >{{ $data->slider_description }}</textarea>
-                            @error('slider_description')
+                            <label class="form-control-label">Description: </label>
+                            <textarea class="form-control" name="vendor_description" id="">{{ $data['vendor_description'] }}</textarea>
+                            @error('vendor_description')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div><!-- col-8 -->
+                    <div class="col-lg-12">
+                        <div class="form-group mg-b-10-force">
+                            <label class="form-control-label">Office Address: <span class="tx-danger">*</span></label>
+                            <textarea class="form-control" name="vendor_office_address" id=""> {{ $data['vendor_office_address'] }}</textarea>
+                            @error('vendor_office_address')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
@@ -90,7 +154,7 @@
                         </div>
                     </div><!-- col-8 -->
                     <div class="form-layout-footer">
-                        <button class="ml-3 btn btn-info">Update Slider</button>
+                        <button class="ml-3 btn btn-info">Update Vendor</button>
                     </div><!-- form-layout-footer -->
                 </div>
             </div>
@@ -99,10 +163,10 @@
 <!-- Custom Image Upload Preview -->
 <script type="text/javascript">
     // Main Logo
-    $('#slider_image_input').change(function(){
+    $('#vendor_image_input').change(function(){
     let reader = new FileReader();
     reader.onload = (e) => {
-        $('#slider_image_preview').attr('src', e.target.result);
+        $('#vendor_image_preview').attr('src', e.target.result);
     }
     reader.readAsDataURL(this.files[0]);
     });

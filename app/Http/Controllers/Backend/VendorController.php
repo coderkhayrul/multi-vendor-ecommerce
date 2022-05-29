@@ -91,7 +91,8 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Vendor::where('id', $id)->firstOrFail();
+        return view('backend.pages.multi_vendor.show', compact('data'));
     }
 
     /**
@@ -102,7 +103,8 @@ class VendorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Vendor::where('id', $id)->firstOrFail();
+        return view('backend.pages.multi_vendor.edit', compact('data'));
     }
 
     /**
@@ -114,7 +116,53 @@ class VendorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'vendor_name' => 'required',
+            'vendor_phone' => 'required',
+            'vendor_operator_name' => 'required',
+            'vendor_operator_phone' => 'required',
+            'vendor_tin' => 'required',
+            'vendor_tread_number' => 'required',
+            'vendor_office_address' => 'required',
+        ]);
+
+        $data = Vendor::where('id', $id)->firstOrFail();
+
+        // Category Image Update
+        if ($request->hasFile('vendor_image')) {
+            // Old Image Delete
+            if (File::exists('backend/uploads/vendor/'.$data->vendor_image)) {
+                File::delete('backend/uploads/vendor/'.$data->vendor_image);
+            }
+
+            $image = $request->file('vendor_image');
+            $imageName = 'vendor' . time() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(250, 250)->save('backend/uploads/vendor/' . $imageName);
+        }else{
+            $imageName = $data->vendor_image;
+        }
+
+        $vendor = Vendor::where('vendor_status', 1)->where('id', $id)->update([
+            'vendor_name' => $request->vendor_name,
+            'vendor_phone' => $request->vendor_phone,
+            'vendor_operator_name' => $request->vendor_operator_name,
+            'vendor_operator_phone' => $request->vendor_operator_phone,
+            'vendor_tin' => $request->vendor_tin,
+            'vendor_tread_number' => $request->vendor_tread_number,
+            'vendor_email' => $request->vendor_email,
+            'vendor_description' => $request->vendor_description,
+            'vendor_office_address' => $request->vendor_office_address,
+            'vendor_image' => $imageName,
+            'updated_at' => Carbon::now()->toDateTimeString(),
+        ]);
+
+        if ($vendor) {
+            Session::flash('success', "Vendor Update Successfully!");
+            return redirect()->route('vendor.index');
+        }else{
+            Session::flash('error', "Vendor Update Failed!");
+            return redirect()->route('vendor.index');
+        }
     }
 
     /**
@@ -125,7 +173,20 @@ class VendorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $vendor = Vendor::where('id', $id)->firstOrFail();
+
+        if (File::exists('backend/uploads/vendor/'.$vendor->vendor_image)) {
+            File::delete('backend/uploads/category/'.$vendor->vendor_image);
+        }
+        $vendor->delete();
+
+        if ($vendor) {
+            Session::flash('success', "Vendor Delete Successfully!");
+            return redirect()->route('vendor.index');
+        }else{
+            Session::flash('error', "Vendor Delete Failed!");
+            return redirect()->route('vendor.index');
+        }
     }
 
         /**

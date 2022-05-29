@@ -121,7 +121,7 @@
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group mg-b-10-force text-center">
-                            <img id="vendor_image_preview" class=" img-fluid rounded wd-80" src="{{ asset('backend/default/no-image-pro.png') }}"
+                            <img id="vendor_image_preview" class="img-fluid rounded wd-80" src="{{ asset('backend/default/no-image-pro.png') }}"
                             alt="slider_image">
                         </div><!-- col-4 -->
                     </div>
