@@ -12,6 +12,7 @@
 <script src="{{ asset('backend/lib/flot-spline/js/jquery.flot.spline.min.js') }}"></script>
 <script src="{{ asset('backend/lib/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
 <script src="{{ asset('backend/lib/echarts/echarts.min.js') }}"></script>
+<script src="{{ asset('backend/lib/highlightjs/highlight.pack.min.js') }}"></script>
 <script src="{{ asset('backend/lib/select2/js/select2.full.min.js') }}"></script>
 <script src="http://maps.google.com/maps/api/js?key=AIzaSyAq8o5-8Y5pudbJMJtDFzb8aHiWJufa5fg"></script>
 <script src="{{ asset('backend/lib/gmaps/gmaps.min.js') }}"></script>
@@ -21,4 +22,5 @@
 <script src="{{ asset('backend/js/map.shiftworker.js') }}"></script>
 <script src="{{ asset('backend/js/ResizeSensor.js') }}"></script>
 <script src="{{ asset('backend/js/dashboard.js') }}"></script>
+<script src="{{ asset('backend/js/custom.js') }}"></script>
 @yield('custom-script')

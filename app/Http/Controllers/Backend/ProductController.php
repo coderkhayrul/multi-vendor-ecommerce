@@ -1,7 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.product.index');
+        $products = Product::all();
+        return view('backend.pages.product.index', compact('products'));
     }
 
     /**
@@ -23,7 +28,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('backend.pages.product.create');
+        $categories = Category::all();
+        return view('backend.pages.product.create', compact('categories'));
     }
 
     /**
@@ -82,16 +88,18 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
+            /**
+     * Remove the specified resource from storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function active_status(Request $request, $id)
+    public function active_status($id)
     {
-        //
+        Product::where('id', $id)->where('product_status', 0)->update([
+            'product_status' => 1
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -102,6 +110,19 @@ class ProductController extends Controller
      */
     public function deactive_status($id)
     {
-        //
+        Product::where('id', $id)->where('product_status', 1)->update([
+            'product_status' => 0
+        ]);
+        return redirect()->back();
+    }
+
+
+    public function get_sub_category(Request $request){
+        $get_sub_category = SubCategory::where('category_id', $request->category_id)->where('sub_category_status', 1)->get();
+
+        return response()->json([
+            'status' => '200',
+            'data' => $get_sub_category
+        ]);
     }
 }

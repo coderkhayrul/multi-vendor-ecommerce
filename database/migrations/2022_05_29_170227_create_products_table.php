@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('product_code');
             $table->string('product_price');
             $table->string('product_discount');
+            $table->string('product_discount_price');
             $table->string('product_short_des');
             $table->string('product_long_des');
             $table->string('product_thumbnails');
