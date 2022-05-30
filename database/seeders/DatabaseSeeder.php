@@ -15,10 +15,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        \App\Models\User::create([
-            'name' => 'Admin',
-            'email' => 'admin@mail.com',
-            'password' => Hash::make('password'),
-        ]);
+        // \App\Models\User::create([
+        //     'full_name' => 'Khayrul Shanto',
+        //     'name' => 'Admin',
+        //     'role' => 1,
+        //     'email' => 'admin@mail.com',
+        //     'password' => Hash::make('password'),
+        // ]);
+
+        \App\Models\Category::factory(10)->create();
     }
 }

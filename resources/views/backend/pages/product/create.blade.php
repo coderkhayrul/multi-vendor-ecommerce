@@ -154,6 +154,17 @@
                             alt="product_image">
                         </div><!-- col-4 -->
                     </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mg-b-10-force">
+                            <label class="form-control-label">Vendor Multi Image: </label>
+                            <input multiple id="product_image_input" type="file" class="form-control" name="product_thumbnails">
+                            @error('product_thumbnails')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div><!-- col-4 -->
+                    </div>
                     <div class="col-lg-12">
                         <div class="form-group mg-b-10-force">
                             <label class="form-control-label">Short Description: </label>

@@ -124,7 +124,7 @@ class CategoryController extends Controller
 
             $image = $request->file('category_image');
             $imageName = 'category' . time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->resize(250, 250)->save('backend/uploads/category/' . $imageName);
+            Image::make($image)->resize(120, 120)->save('backend/uploads/category/' . $imageName);
         }else{
             $imageName = $data->category_image;
         }
