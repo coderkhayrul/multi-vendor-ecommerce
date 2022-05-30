@@ -184,7 +184,7 @@
                     </div><!-- col-8 -->
                     <div class="form-layout-footer">
                         <button class="ml-3 btn btn-info">Create Product</button>
-                    </div><!-- form-layout-footer -->
+                    </div> <!-- form-layout-footer -->
                 </div>
             </div>
         </form>
@@ -192,10 +192,10 @@
 <!-- Custom Image Upload Preview -->
 <script type="text/javascript">
     // Main Logo
-    $('#vendor_image_input').change(function(){
+    $('#product_image_input').change(function(){
     let reader = new FileReader();
     reader.onload = (e) => {
-        $('#vendor_image_preview').attr('src', e.target.result);
+        $('#product_image_preview').attr('src', e.target.result);
     }
     reader.readAsDataURL(this.files[0]);
     });

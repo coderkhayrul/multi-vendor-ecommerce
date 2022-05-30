@@ -117,9 +117,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $product = Product::where('product_slug', $slug)->firstOrFail();
+        $product_gallery = ProductGallery::where('product_code', $product->product_code)->get();
+        return view('backend.pages.product.edit', compact('product_gallery', 'product'));
     }
 
     /**
@@ -143,19 +145,24 @@ class ProductController extends Controller
     public function destroy($slug)
     {
         $product = Product::where('product_slug', $slug)->firstOrFail();
-
-        return $product;
+        $proGallery = ProductGallery::where('product_code', $product->product_code)->get();
+        foreach ($proGallery as $gallery){
+            if (File::exists('backend/uploads/product/gallery/'.$gallery->image)) {
+                File::delete('backend/uploads/product/gallery/'.$gallery->image);
+            }
+            $gallery->delete();
+        }
 
         if (File::exists('backend/uploads/product/'.$product->product_thumbnails)) {
             File::delete('backend/uploads/product/'.$product->product_thumbnails);
         }
-
+        $product->delete();
         if ($product) {
-            Session::flash('success', "Category Delete Successfully!");
-            return redirect()->route('category.index');
+            Session::flash('success', "Product Delete Successfully!");
+            return redirect()->route('product.index');
         }else{
-            Session::flash('error', "Category Delete Failed!");
-            return redirect()->route('category.index');
+            Session::flash('error', "Product Delete Failed!");
+            return redirect()->route('product.index');
         }
     }
 
