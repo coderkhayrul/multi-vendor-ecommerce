@@ -203,4 +203,14 @@ class ProductController extends Controller
             'data' => $get_sub_category
         ]);
     }
+
+    public function gallery_image(Request $request, $id)
+    {
+        $gallery = ProductGallery::find($id);
+        if (File::exists('backend/uploads/product/gallery/'.$gallery->image)) {
+            File::delete('backend/uploads/product/gallery/'.$gallery->image);
+        }
+        $gallery->delete();
+        return redirect()->back();
+    }
 }

@@ -93,7 +93,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/active/{slug}',[ ProductController::class, 'active_status' ])->name('product.active');
         Route::get('/deactive/{slug}',[ ProductController::class, 'deactive_status' ])->name('product.deactive');
 
+
+        // Get ajax Data For Sub Category
         Route::post('/get-product-sub-category',[ ProductController::class, 'get_sub_category' ]);
+
+
+        // Single Product Gallery Image Delete
+        Route::get('/gallery/{id}',[ ProductController::class, 'gallery_image' ])->name('product.gallery.image');
 
     });
 });

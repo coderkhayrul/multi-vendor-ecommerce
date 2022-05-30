@@ -38,7 +38,8 @@
                             <img class="img-fluid img-thumbnail img-responsive wd-200"
                                 src="{{ asset('backend/uploads/product/gallery/'.$gallery->image) }}" alt="product_image">
                             <figcaption class="overlay-body pd-l-25 pd-t-20">
-                                <a href="#">
+
+                                <a href="{{ route('product.gallery.image',$gallery->id) }}">
                                     <div class="text-danger tx-20"><i class="icon ion-close"></i></div>
                                 </a>
                             </figcaption>
