@@ -119,9 +119,12 @@ class ProductController extends Controller
      */
     public function edit($slug)
     {
+        $categories = Category::all();
+        $vendors = Vendor::all();
+
         $product = Product::where('product_slug', $slug)->firstOrFail();
         $product_gallery = ProductGallery::where('product_code', $product->product_code)->get();
-        return view('backend.pages.product.edit', compact('product_gallery', 'product'));
+        return view('backend.pages.product.edit', compact('product_gallery', 'product', 'categories', 'vendors'));
     }
 
     /**
