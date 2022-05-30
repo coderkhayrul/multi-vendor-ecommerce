@@ -22,11 +22,11 @@ class CreateProductsTable extends Migration
             $table->string('product_slug');
             $table->string('product_code');
             $table->string('product_price');
-            $table->string('product_discount');
-            $table->string('product_discount_price');
-            $table->string('product_short_des');
-            $table->string('product_long_des');
-            $table->string('product_thumbnails');
+            $table->string('product_discount')->nullable();
+            $table->string('product_discount_price')->nullable();
+            $table->string('product_short_des')->nullable();
+            $table->string('product_long_des')->nullable();
+            $table->string('product_thumbnails')->nullable();
             $table->string('product_quantity');
             $table->string('product_status');
             $table->timestamps();

@@ -85,13 +85,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/',[ ProductController::class, 'index' ])->name('product.index');
         Route::get('/create',[ ProductController::class, 'create' ])->name('product.create');
         Route::post('/',[ ProductController::class, 'store' ])->name('product.store');
-        Route::get('/show/{id}',[ ProductController::class, 'show' ])->name('product.show');
-        Route::get('/edit/{id}',[ ProductController::class, 'edit' ])->name('product.edit');
-        Route::put('/{id}',[ ProductController::class, 'update' ])->name('product.update');
-        Route::get('/delete/{id}',[ ProductController::class, 'destroy' ])->name('product.destroy');
+        Route::get('/show/{slug}',[ ProductController::class, 'show' ])->name('product.show');
+        Route::get('/edit/{slug}',[ ProductController::class, 'edit' ])->name('product.edit');
+        Route::put('/{slug}',[ ProductController::class, 'update' ])->name('product.update');
+        Route::get('/delete/{slug}',[ ProductController::class, 'destroy' ])->name('product.destroy');
 
-        Route::get('/active/{id}',[ ProductController::class, 'active_status' ])->name('product.active');
-        Route::get('/deactive/{id}',[ ProductController::class, 'deactive_status' ])->name('product.deactive');
+        Route::get('/active/{slug}',[ ProductController::class, 'active_status' ])->name('product.active');
+        Route::get('/deactive/{slug}',[ ProductController::class, 'deactive_status' ])->name('product.deactive');
 
         Route::post('/get-product-sub-category',[ ProductController::class, 'get_sub_category' ]);
 

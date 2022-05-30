@@ -32,7 +32,13 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Vendor Name: <span class="tx-danger">*</span></label>
-                            <input value="{{ old('vendor_id') }}" class="form-control" type="text" name="vendor_id" placeholder="Vendor Name">
+                            <select name="vendor_id" class="form-control">
+                                <option label="Select Vendor"></option>
+                                @foreach ($vendors as $vendor)
+                                <option value="{{ $vendor->id }}">{{ $vendor->vendor_name }}</option>
+                                @endforeach
+                            </select>
+
                             @error('vendor_id')
                                 <div class="text-danger">
                                     {{ $message }}
@@ -82,17 +88,6 @@
                     </div><!-- col-4 -->
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label">Product Code: <span class="tx-danger">*</span></label>
-                            <input value="{{ old('product_code') }}" class="form-control" type="text" name="product_code" placeholder="Product Code">
-                            @error('product_code')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div><!-- col-4 -->
-                    <div class="col-lg-6">
-                        <div class="form-group">
                             <label class="form-control-label">Product Price: <span class="tx-danger">*</span></label>
                             <input value="{{ old('product_price') }}" class="form-control" type="number" name="product_price" placeholder="Product Price">
                             @error('product_price')
@@ -106,7 +101,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Product Discount: <span class="tx-danger">*</span></label>
-                            <input value="{{ old('product_discount') }}" class="form-control" type="text" name="product_discount" placeholder="Product Discount">
+                            <input value="{{ old('product_discount') }}" class="form-control" type="number" name="product_discount" placeholder="Product Discount">
                             @error('product_discount')
                                 <div class="text-danger">
                                     {{ $message }}
@@ -117,7 +112,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Product Discount Price: <span class="tx-danger">*</span></label>
-                            <input value="{{ old('product_discount_price') }}" class="form-control" type="text" name="product_discount_price" placeholder="Product Discount Price">
+                            <input value="{{ old('product_discount_price') }}" class="form-control" type="number" name="product_discount_price" placeholder="Product Discount Price">
                             @error('product_discount_price')
                                 <div class="text-danger">
                                     {{ $message }}
@@ -139,7 +134,7 @@
 
                     <div class="col-lg-4">
                         <div class="form-group mg-b-10-force">
-                            <label class="form-control-label">Vendor Image: </label>
+                            <label class="form-control-label">Product Image: </label>
                             <input id="product_image_input" type="file" class="form-control" name="product_thumbnails">
                             @error('product_thumbnails')
                                 <div class="text-danger">
@@ -156,9 +151,9 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group mg-b-10-force">
-                            <label class="form-control-label">Vendor Multi Image: </label>
-                            <input multiple id="product_image_input" type="file" class="form-control" name="product_thumbnails">
-                            @error('product_thumbnails')
+                            <label class="form-control-label">Product Multi Image: </label>
+                            <input multiple type="file" class="form-control" name="image[]">
+                            @error('image')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>

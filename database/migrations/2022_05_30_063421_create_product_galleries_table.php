@@ -15,6 +15,8 @@ class CreateProductGalleriesTable extends Migration
     {
         Schema::create('product_galleries', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('product_code');
+            $table->string('image');
             $table->timestamps();
         });
     }
