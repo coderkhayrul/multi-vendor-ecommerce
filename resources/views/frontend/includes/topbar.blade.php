@@ -4,7 +4,7 @@
             <div class="col-xl-3 col-lg-4">
                 <div class="header-info">
                     <ul>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="{{ route('frontend.about_us') }}">About Us</a></li>
                         @auth
                             @if (Auth::user()->role == 3)
                             <li><a href="#">My Account</a></li>

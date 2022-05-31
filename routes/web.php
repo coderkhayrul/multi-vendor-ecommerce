@@ -25,6 +25,10 @@ Route::get('/', [FrontendController::class, 'home'])->name('frontend.home');
 Route::get('/user-login', [FrontendController::class, 'user_login'])->name('frontend.user_login');
 Route::get('/user-register', [FrontendController::class, 'user_register'])->name('frontend.user_register');
 
+Route::get('/purchase-guide', [FrontendController::class, 'purchase_guide'])->name('frontend.purchase_guide');
+Route::get('/about-us', [FrontendController::class, 'about_us'])->name('frontend.about_us');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
+
 
 // <<============ ALL ROUTE FOR ADMIN ===============>>
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
