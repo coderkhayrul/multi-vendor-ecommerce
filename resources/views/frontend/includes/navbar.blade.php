@@ -155,7 +155,7 @@
                                 <a href="blog-category-grid.html">Blog</a>
                             </li>
                             <li>
-                                <a href="{{ route('frontend.contact') }}">Contact</a>
+                                <a class="{{ Route::currentRouteName() == 'frontend.contact' ? 'active' : '' }}" href="{{ route('frontend.contact') }}">Contact</a>
                             </li>
                             <li>
                                 <a class="{{ Route::currentRouteName() == 'frontend.purchase_guide' ? 'active' : '' }}" href="{{ route('frontend.purchase_guide') }}">Purchase Guide</a>
