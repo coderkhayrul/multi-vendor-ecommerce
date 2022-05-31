@@ -156,7 +156,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group mg-b-10-force">
                                     <label class="form-control-label">Short Description: </label>
-                                    <textarea class="form-control" name="product_short_des" id="">{{ $product['product_short_des'] }}</textarea>
+                                    <textarea id="summernote" class="form-control" name="product_short_des" id="">{{ $product['product_short_des'] }}</textarea>
                                     @error('product_short_des')
                                         <div class="text-danger">
                                             {{ $message }}
@@ -166,8 +166,8 @@
                             </div><!-- col-8 -->
                             <div class="col-lg-12">
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">Login Description: <span class="tx-danger">*</span></label>
-                                    <textarea class="form-control" name="product_long_des" id="">{{ $product['product_long_des'] }}</textarea>
+                                    <label class="form-control-label">Long Description: <span class="tx-danger">*</span></label>
+                                    <textarea id="summernote2" class="form-control" name="product_long_des" id="">{{ $product['product_long_des'] }}</textarea>
                                     @error('product_long_des')
                                         <div class="text-danger">
                                             {{ $message }}
@@ -216,4 +216,23 @@
     </div><!-- col-lg-8 -->
 </div><!-- row -->
 </div>
+<script>
+    $(function(){
+    'use strict';
+
+    // Inline editor
+    var editor = new MediumEditor('.editable');
+
+    // Summernote editor
+    $('#summernote').summernote({
+        height: 150,
+        tooltip: false
+    })
+    // Summernote editor
+    $('#summernote2').summernote({
+        height: 150,
+        tooltip: false
+    })
+    });
+</script>
 @endsection

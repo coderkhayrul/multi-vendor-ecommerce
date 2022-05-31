@@ -3,6 +3,9 @@
     <link href="{{ asset('backend/lib/ionicons/css/ionicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/lib/rickshaw/rickshaw.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/lib/select2/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend') }}/lib/medium-editor/css/medium-editor.min.css" rel="stylesheet">
+    <link href="{{ asset('backend') }}/lib/medium-editor/css/themes/default.min.css" rel="stylesheet">
+    <link href="{{ asset('backend') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
     @yield('custom-style')
 
     <!-- Bracket CSS -->

@@ -163,7 +163,7 @@
                     <div class="col-lg-12">
                         <div class="form-group mg-b-10-force">
                             <label class="form-control-label">Short Description: </label>
-                            <textarea class="form-control" name="product_short_des" id=""></textarea>
+                            <textarea id="summernote" class="form-control" name="product_short_des" id=""></textarea>
                             @error('product_short_des')
                                 <div class="text-danger">
                                     {{ $message }}
@@ -174,7 +174,7 @@
                     <div class="col-lg-12">
                         <div class="form-group mg-b-10-force">
                             <label class="form-control-label">Login Description: <span class="tx-danger">*</span></label>
-                            <textarea class="form-control" name="product_long_des" id=""></textarea>
+                            <textarea id="summernote2" class="form-control" name="product_long_des" id=""></textarea>
                             @error('product_long_des')
                                 <div class="text-danger">
                                     {{ $message }}
@@ -198,6 +198,25 @@
         $('#product_image_preview').attr('src', e.target.result);
     }
     reader.readAsDataURL(this.files[0]);
+    });
+</script>
+<script>
+    $(function(){
+    'use strict';
+
+    // Inline editor
+    var editor = new MediumEditor('.editable');
+
+    // Summernote editor
+    $('#summernote').summernote({
+        height: 150,
+        tooltip: false
+    })
+    // Summernote editor
+    $('#summernote2').summernote({
+        height: 150,
+        tooltip: false
+    })
     });
 </script>
 @endsection

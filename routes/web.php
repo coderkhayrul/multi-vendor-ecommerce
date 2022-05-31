@@ -20,7 +20,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// <<============ ALL ROUTE FOR HOME ===============>>
 Route::get('/', [FrontendController::class, 'home'])->name('frontend.home');
+Route::get('/user-login', [FrontendController::class, 'user_login'])->name('frontend.user_login');
+Route::get('/user-register', [FrontendController::class, 'user_register'])->name('frontend.user_register');
 
 
 // <<============ ALL ROUTE FOR ADMIN ===============>>
@@ -93,11 +96,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/active/{slug}',[ ProductController::class, 'active_status' ])->name('product.active');
         Route::get('/deactive/{slug}',[ ProductController::class, 'deactive_status' ])->name('product.deactive');
 
-
         // Get ajax Data For Sub Category
         Route::post('/get-product-sub-category',[ ProductController::class, 'get_sub_category' ]);
-
-
         // Single Product Gallery Image Delete
         Route::get('/gallery/{id}',[ ProductController::class, 'gallery_image' ])->name('product.gallery.image');
 

@@ -41,18 +41,26 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'full_name' => $request->full_name,
-            'role' => $request->role,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        if ($request->security_code == '8675') {
+            $user = User::create([
+                'full_name' => $request->full_name,
+                'role' => $request->role,
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+            event(new Registered($user));
 
-        event(new Registered($user));
+            Auth::login($user);
 
-        Auth::login($user);
+            if ($request->role == 3) {
+                return redirect(RouteServiceProvider::HOME);
+            }else{
+                return redirect(RouteServiceProvider::ADMIN);
+            }
+        }else {
+            return redirect()->back();
+        }
 
-        return redirect(RouteServiceProvider::HOME);
     }
 }

@@ -128,7 +128,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="{{ asset('frontend') }}/imgs/theme/logo.svg" alt="logo"></a>
+                        <a href="{{ route('frontend.home') }}"><img src="{{ asset('frontend') }}/imgs/theme/logo.svg" alt="logo"></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
@@ -229,34 +229,56 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="header-action-icon-2">
-                                    <a href="page-account.html">
-                                        <img class="svgInject" alt="Nest" src="{{ asset('frontend') }}/imgs/theme/icons/icon-user.svg">
-                                    </a>
-                                    <a href="page-account.html"><span class="lable ml-0">Account</span></a>
-                                    <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
-                                        <ul>
-                                            <li>
-                                                <a href="page-account.html"><i class="fi fi-rs-user mr-10"></i>My Account</a>
-                                            </li>
-                                            <li>
-                                                <a href="page-account.html"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
-                                            </li>
-                                            <li>
-                                                <a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-wishlist.html"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
-                                            </li>
-                                            <li>
-                                                <a href="page-account.html"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
-                                            </li>
-                                            <li>
-                                                <a href="page-login.html"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
-                                            </li>
-                                        </ul>
+                                @auth
+                                    @if (Auth::user()->role == 3)
+                                    <div class="header-action-icon-2">
+                                        <a href="page-account.html">
+                                            <img class="svgInject" alt="Nest" src="{{ asset('frontend') }}/imgs/theme/icons/icon-user.svg">
+                                        </a>
+                                        <a href="page-account.html"><span class="lable ml-0">Account</span></a>
+                                        <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
+                                            <ul>
+                                                <li>
+                                                    <a href="#"><i class="fi fi-rs-user mr-10"></i>My Account</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
+                                    @else
+                                    <div class="header-action-icon-2">
+                                        <a href="page-account.html">
+                                            <img class="svgInject" alt="Nest" src="{{ asset('frontend') }}/imgs/theme/icons/icon-user.svg">
+                                        </a>
+                                        <a href="{{ route('frontend.user_login') }}"><span class="lable ml-0">Login</span></a>
+                                    </div>
+                                    @endif
+                                @endauth
+                                @guest
+                                    <div class="header-action-icon-2">
+                                        <a href="page-account.html">
+                                            <img class="svgInject" alt="Nest" src="{{ asset('frontend') }}/imgs/theme/icons/icon-user.svg">
+                                        </a>
+                                        <a href="{{ route('frontend.user_login') }}"><span class="lable ml-0">Login</span></a>
+                                    </div>
+                                @endguest
+
+
+
                             </div>
                         </div>
                     </div>

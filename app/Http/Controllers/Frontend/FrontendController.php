@@ -10,4 +10,12 @@ class FrontendController extends Controller
     public function home(){
         return view('frontend.home');
     }
+
+    public function user_login(){
+        return view('frontend.login');
+    }
+
+    public function user_register(){
+        return view('frontend.register');
+    }
 }

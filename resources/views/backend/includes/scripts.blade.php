@@ -16,6 +16,8 @@
 <script src="{{ asset('backend/lib/select2/js/select2.full.min.js') }}"></script>
 <script src="http://maps.google.com/maps/api/js?key=AIzaSyAq8o5-8Y5pudbJMJtDFzb8aHiWJufa5fg"></script>
 <script src="{{ asset('backend/lib/gmaps/gmaps.min.js') }}"></script>
+<script src="{{ asset('backend') }}/lib/summernote/summernote-bs4.min.js"></script>
+<script src="{{ asset('backend') }}/lib/medium-editor/js/medium-editor.min.js"></script>
 
 <!-- Main Script -->
 <script src="{{ asset('backend/js/bracket.js') }}"></script>

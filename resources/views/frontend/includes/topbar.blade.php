@@ -4,10 +4,22 @@
             <div class="col-xl-3 col-lg-4">
                 <div class="header-info">
                     <ul>
-                        <li><a href="page-about.htlm">About Us</a></li>
-                        <li><a href="page-account.html">My Account</a></li>
-                        <li><a href="shop-wishlist.html">Wishlist</a></li>
-                        <li><a href="shop-order.html">Order Tracking</a></li>
+                        <li><a href="#">About Us</a></li>
+                        @auth
+                            @if (Auth::user()->role == 3)
+                            <li><a href="#">My Account</a></li>
+                            @else
+                            <li><a href="{{ route('frontend.user_login') }}">Login</a></li>
+                            <li><a href="{{ route('frontend.user_register') }}">Register</a></li>
+                            @endif
+                        @endauth
+                        @guest
+                            <li><a href="{{ route('frontend.user_login') }}">Login</a></li>
+                            <li><a href="{{ route('frontend.user_register') }}">Register</a></li>
+                        @endguest
+
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Order Tracking</a></li>
                     </ul>
                 </div>
             </div>
