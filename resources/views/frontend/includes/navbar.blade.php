@@ -31,7 +31,7 @@
                                             src="{{ asset('backend') }}/uploads/category/{{ $category->category_image}}"
                                             alt="">{{ $category->category_name }}</a>
                                 </li>
-                                @elseif ($count >=4)
+                                @elseif ($count <= 6)
                                 <li>
                                     <a href="shop-grid-right.html"> <img
                                             src="{{ asset('backend') }}/uploads/category/{{ $category->category_image}}"
@@ -88,14 +88,14 @@
                                 <a href="shop-grid-right.html">Category <i class="fi-rs-angle-down"></i></a>
                                 <ul class="sub-menu">
                                     @foreach ($categories as $category)
+                                    @php
+                                        $subcategories = App\Models\SubCategory::where('category_id',$category->id)->get();
+                                    @endphp
                                     <li>
                                         <a href="#">{{ $category->category_name }}<i class="fi-rs-angle-right"></i></a>
                                         <ul class="level-menu">
-                                            @php
-                                                $subcategories = App\Models\SubCategory::where('category_id',$category->id)->get();
-                                            @endphp
                                             @foreach ($subcategories as $subcategory)
-                                            <li><a href="shop-product-right.html">{{ $subcategory->sub_category_name }}</a></li>
+                                            <li><a href="#">{{ $subcategory->sub_category_name }}</a></li>
                                             @endforeach
                                         </ul>
                                     </li>
