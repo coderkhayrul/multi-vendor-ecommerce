@@ -7,6 +7,22 @@
             Product</a>
     </div>
     <div class="card-body">
+        @if (Session::has('success'))
+            <div class="alert alert-success" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <strong class="d-block d-sm-inline-block-force">{{ Session::get('success') }}</strong>
+            </div>
+        @endif
+        @if (Session::has('error'))
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <strong class="d-block d-sm-inline-block-force">{{ Session::get('error') }}</strong>
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-12 text-center">
                 @if ($product->product_thumbnails)
@@ -18,8 +34,9 @@
                 @endif
             </div>
             <div class="col-md-12">
-                <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('product.update',$product->product_slug) }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="form-layout form-layout-1">
                         <div class="row mg-b-25">
                             <div class="col-lg-6">
@@ -59,7 +76,9 @@
                                 <div class="form-group">
                                     <label class="form-control-label">Sub Category Name: <span class="tx-danger">*</span></label>
                                     <select id="sub_category-dropdown" name="sub_category_id" class="form-control select2-show-search">
-
+                                        @foreach ($sub_category as $subCategory)
+                                        <option {{ $product->sub_category_id == $subCategory->id ? 'selected' : '' }} value="{{ $subCategory->id }}">{{ $subCategory->sub_category_name }}</option>
+                                        @endforeach
                                     </select>
                                     @error('sub_category_id')
                                         <div class="text-danger">
@@ -216,6 +235,16 @@
     </div><!-- col-lg-8 -->
 </div><!-- row -->
 </div>
+<script type="text/javascript">
+    // Main Logo
+    $('#product_image_input').change(function(){
+    let reader = new FileReader();
+    reader.onload = (e) => {
+        $('#product_image_preview').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(this.files[0]);
+    });
+</script>
 <script>
     $(function(){
     'use strict';

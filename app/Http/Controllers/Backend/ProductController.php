@@ -94,7 +94,6 @@ class ProductController extends Controller
                     'created_at' => Carbon::now()->toDateTimeString(),
                 ]);
             }
-
         }
         Session::flash('success', 'Product Create Successfully');
         return redirect()->back();
@@ -120,11 +119,12 @@ class ProductController extends Controller
     public function edit($slug)
     {
         $categories = Category::all();
+        $sub_category = SubCategory::all();
         $vendors = Vendor::all();
 
         $product = Product::where('product_slug', $slug)->firstOrFail();
         $product_gallery = ProductGallery::where('product_code', $product->product_code)->get();
-        return view('backend.pages.product.edit', compact('product_gallery', 'product', 'categories', 'vendors'));
+        return view('backend.pages.product.edit', compact('product_gallery', 'product', 'categories', 'vendors', 'sub_category'));
     }
 
     /**
@@ -134,9 +134,61 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $this->validate($request,[
+            'vendor_id' => 'required',
+            'category_id' => 'required',
+            'sub_category_id' => 'required',
+            'product_name' => 'required',
+            'product_price' => 'required',
+            'product_quantity' => 'required',
+        ]);
+
+        $product = Product::where('product_slug', $slug)->firstOrFail();
+        if ($request->hasFile('product_thumbnails')) {
+            if (File::exists('backend/uploads/product/'.$product->product_thumbnails)) {
+                File::delete('backend/uploads/product/'.$product->product_thumbnails);
+            }
+
+            $product_image = $request->file('product_thumbnails');
+            $imageName = time() . '_' . rand(100000, 10000000) . '.' . $product_image->getClientOriginalExtension();
+            Image::make($product_image)->resize(120, 120)->save('backend/uploads/product/' . $imageName);
+        }else{
+            $imageName = $product->product_thumbnails;
+        }
+
+        Product::where('product_slug', $slug)->update([
+            'vendor_id' => $request->vendor_id,
+            'category_id' => $request->category_id,
+            'sub_category_id' => $request->sub_category_id,
+            'product_name' => $request->product_name,
+            'product_slug' => Str::slug($request->product_name, '-'),
+            'product_price' => $request->product_price,
+            'product_code' => $product->product_code,
+            'product_discount' => $request->product_discount,
+            'product_discount_price' => $request->product_discount_price,
+            'product_short_des' => $request->product_short_des,
+            'product_long_des' => $request->product_long_des,
+            'product_thumbnails' => $imageName,
+            'product_quantity' => $request->product_quantity,
+            'updated_at' => Carbon::now()->toDateTimeString(),
+        ]);
+
+        if ($request->hasFile('image')) {
+            $gallery_image = $request->file('image');
+            foreach($gallery_image as $image){
+                $multi_imageName = 'PG' . '_' . rand(100000, 10000000) . '.' . $image->getClientOriginalExtension();
+                Image::make($image)->resize(120, 120)->save('backend/uploads/product/gallery/' . $multi_imageName);
+                ProductGallery::create([
+                    'product_code' => $product->product_code,
+                    'image' => $multi_imageName,
+                    'created_at' => Carbon::now()->toDateTimeString(),
+                ]);
+            }
+        }
+        Session::flash('success', 'Product Create Successfully');
+        return redirect()->back();
     }
 
     /**
@@ -206,6 +258,7 @@ class ProductController extends Controller
             'data' => $get_sub_category
         ]);
     }
+
 
     public function gallery_image(Request $request, $id)
     {
