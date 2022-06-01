@@ -6206,7 +6206,7 @@ h6.post-title {
     font-size: 20px;
     font-weight: 700;
     font-family: "Quicksand", sans-serif;
-    padding: 15px 20px;
+    padding: 15px 15px;
     transition: 0.3s;
     align-items: center;
 }
@@ -6223,7 +6223,7 @@ h6.post-title {
     font-size: 20px;
     font-weight: 700;
     font-family: "Quicksand", sans-serif;
-    padding: 15px 20px;
+    padding: 15px 15px;
     transition: 0.3s;
     align-items: center;
     border: 1px solid #F2F3F4;
@@ -6242,7 +6242,7 @@ h6.post-title {
     font-size: 20px;
     font-weight: 700;
     font-family: "Quicksand", sans-serif;
-    padding: 15px 20px;
+    padding: 15px 15px;
     transition: 0.3s;
     align-items: center;
     border: 1px solid #F2F3F4;
@@ -11594,6 +11594,8 @@ footer .hotline img {
     background: #3BB77E;
     color: #fff;
   }
+
+
 }
 
 /*Mobile landscape*/

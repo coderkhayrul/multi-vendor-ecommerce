@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Log in</button>
-                                            <strong style="margin-left: 30px">Login With</strong>
+                                            <strong style="margin-left: 20px; font-size: 15px">Login With</strong>
                                             <a class="social-fb-button" href="#"><i class="fab fa-facebook"></i></a>
                                             <a class="social-google-button" href=""><i class="fab fa-google"></i></a>
                                             <a class="social-linkedin-button" href=""><i class="fab fa-linkedin"></i></a>

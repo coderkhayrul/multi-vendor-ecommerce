@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 // <<============ ALL ROUTE FOR HOME ===============>>
 Route::get('/', [FrontendController::class, 'home'])->name('frontend.home');
+
 Route::get('/user-login', [FrontendController::class, 'user_login'])->name('frontend.user_login');
 Route::get('/user-register', [FrontendController::class, 'user_register'])->name('frontend.user_register');
 

@@ -12,18 +12,26 @@ use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
-    public function home(){
-        $categories = Category::where('category_status', 1)->get();
-        return view('frontend.home');
-    }
-
     public function user_login(){
-
-        return view('frontend.login');
+        if (Auth::check()) {
+            return redirect()->route('frontend.home');
+        }else{
+            return view('frontend.login');
+        }
     }
 
     public function user_register(){
-        return view('frontend.register');
+        if (Auth::check()) {
+            return redirect()->route('frontend.home');
+        }else{
+            return view('frontend.register');
+        }
+    }
+
+
+    public function home(){
+        $categories = Category::where('category_status', 1)->get();
+        return view('frontend.home');
     }
 
     public function purchase_guide(){
