@@ -19,19 +19,11 @@ class FrontendController extends Controller
 
     public function user_login(){
 
-        if(Auth::user()->role == 3){
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }else{
-            return view('frontend.login');
-        }
+        return view('frontend.login');
     }
 
     public function user_register(){
-        if(Auth::user()->role == 3){
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }else{
-            return view('frontend.register');
-        }
+        return view('frontend.register');
     }
 
     public function purchase_guide(){

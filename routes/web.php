@@ -31,9 +31,6 @@ Route::get('/about-us', [FrontendController::class, 'about_us'])->name('frontend
 Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
 Route::get('/vendor', [FrontendController::class, 'vendor'])->name('frontend.vendor');
 
-// google Social Login
-Route::get('/gotogoogle',[SocialLoginController::class,'gotogoogle'])->name('gotogoogle');
-Route::get('/google/login',[SocialLoginController::class,'googleinfostore']);
 
 
 // <<============ ALL ROUTE FOR ADMIN ===============>>
