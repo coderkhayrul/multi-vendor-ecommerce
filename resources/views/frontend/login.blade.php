@@ -22,19 +22,29 @@
                                 <div class="padding_eight_all bg-white">
                                     <div class="heading_s1">
                                         <h1 class="mb-5">Login</h1>
-                                        <p class="mb-30">Don't have an account? <a href="page-register.html">Create here</a></p>
+                                        <p class="mb-30">Don't have an account? <a href="{{ route('frontend.user_register') }}">Create here</a></p>
                                     </div>
-                                    <form method="post" action="{{ route('login') }}">
+                                    <form action="{{ route('login') }}" method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="text" required="" name="email" placeholder="Username or Email *">
+                                            <input class="@error('email') is-invalid @enderror" type="email" id="email" name="email" placeholder="Username or Email *">
+                                            @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input required="" type="password" name="password" placeholder="Your password *">
+                                            <input class="@error('password') is-invalid @enderror" type="password" name="password" placeholder="Your password *">
+                                            @error('password')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="login_footer form-group">
                                             <div class="chek-form">
-                                                <input type="text" required="" name="email" placeholder="Security code *">
+                                                <input type="text" name="security_code" placeholder="Security code *">
                                             </div>
                                             <span class="security-code">
                                                 <b class="text-new">8</b>
@@ -56,7 +66,6 @@
                                             <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Log in</button>
                                         </div>
                                     </form>
-                                    <a href="{{ route('gotogoogle') }}" class="btn btn-success">Google</a>
                                 </div>
                             </div>
                         </div>

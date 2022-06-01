@@ -232,10 +232,10 @@
                                 @auth
                                     @if (Auth::user()->role == 3)
                                     <div class="header-action-icon-2">
-                                        <a href="page-account.html">
+                                        <a href="#">
                                             <img class="svgInject" alt="Nest" src="{{ asset('frontend') }}/imgs/theme/icons/icon-user.svg">
                                         </a>
-                                        <a href="page-account.html"><span class="lable ml-0">Account</span></a>
+                                        <a href="#"><span class="lable ml-0">Account</span></a>
                                         <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                             <ul>
                                                 <li>
@@ -254,7 +254,11 @@
                                                     <a href="#"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
+                                                    <a onclick="event.preventDefault(); document.getElementById('form-logout').submit();" href="{{ route('logout') }}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
+                                                    {{-- Logout Form --}}
+                                                    <form id="form-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                        {{ csrf_field() }}
+                                                    </form>
                                                 </li>
                                             </ul>
                                         </div>
