@@ -5,7 +5,7 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="{{ route('frontend.home') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                <span></span> Pages <span></span> My Account
+                <span></span> Login
             </div>
         </div>
     </div>
@@ -64,6 +64,10 @@
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Log in</button>
+                                            <strong style="margin-left: 30px">Login With</strong>
+                                            <a class="social-fb-button" href="#"><i class="fab fa-facebook"></i></a>
+                                            <a class="social-google-button" href=""><i class="fab fa-google"></i></a>
+                                            <a class="social-linkedin-button" href=""><i class="fab fa-linkedin"></i></a>
                                         </div>
                                     </form>
                                 </div>

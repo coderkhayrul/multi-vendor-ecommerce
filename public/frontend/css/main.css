@@ -6198,6 +6198,60 @@ h6.post-title {
   font-weight: 600;
   display: inline-block;
 }
+.social-fb-button{
+    margin-left:30px;
+    background-color:#1877F2;
+    border-radius:5px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: "Quicksand", sans-serif;
+    padding: 15px 20px;
+    transition: 0.3s;
+    align-items: center;
+}
+.social-fb-button:hover{
+    background-color:#3BB77E;
+    color: white;
+}
+
+.social-google-button{
+    margin-left:10px;
+    background-color:#fff;
+    border-radius:5px;
+    color: #7E7E7E;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: "Quicksand", sans-serif;
+    padding: 15px 20px;
+    transition: 0.3s;
+    align-items: center;
+    border: 1px solid #F2F3F4;
+}
+
+.social-google-button:hover{
+    background-color:#3BB77E;
+    color: white;
+}
+
+.social-linkedin-button{
+    margin-left:10px;
+    background-color:#0073b1;
+    border-radius:5px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: "Quicksand", sans-serif;
+    padding: 15px 20px;
+    transition: 0.3s;
+    align-items: center;
+    border: 1px solid #F2F3F4;
+}
+
+.social-linkedin-button:hover{
+    background-color:#3BB77E;
+    color: white;
+}
 
 /** Print **/
 @media print {
