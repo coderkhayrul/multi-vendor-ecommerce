@@ -65,9 +65,9 @@
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Log in</button>
                                             <strong style="margin-left: 20px; font-size: 15px">Login With</strong>
-                                            <a class="social-fb-button" href="#"><i class="fab fa-facebook"></i></a>
-                                            <a class="social-google-button" href=""><i class="fab fa-google"></i></a>
-                                            <a class="social-linkedin-button" href=""><i class="fab fa-linkedin"></i></a>
+                                            <a class="social-fb-button" href="{{ route('frontend.auth.facebook') }}"><i class="fab fa-facebook"></i></a>
+                                            <a class="social-google-button" href="{{ route('frontend.auth.google') }}"><i class="fab fa-google"></i></a>
+                                            <a class="social-linkedin-button" href="{{ route('frontend.auth.linkedin') }}"><i class="fab fa-linkedin"></i></a>
                                         </div>
                                     </form>
                                 </div>

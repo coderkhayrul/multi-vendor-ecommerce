@@ -6,9 +6,12 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\FacebookSocialiteController;
+use App\Http\Controllers\GoogleSocialiteController;
 use App\Http\Controllers\Frontend\FrontendController;
-use App\Http\Controllers\SocialLoginController;
+use App\Http\Controllers\LinkedinSocialiteController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +35,17 @@ Route::get('/about-us', [FrontendController::class, 'about_us'])->name('frontend
 Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
 Route::get('/vendor', [FrontendController::class, 'vendor'])->name('frontend.vendor');
 
+// GOOGLE LOGIN ROUTE
+Route::get('auth/google', [GoogleSocialiteController::class, 'redirectToGoogle'])->name('frontend.auth.google');
+Route::get('callback/google', [GoogleSocialiteController::class, 'handleCallback']);
+
+// FACEBOOK LOGIN ROUTE
+Route::get('auth/facebook', [FacebookSocialiteController::class, 'redirectToFB'])->name('frontend.auth.facebook');
+Route::get('callback/facebook', [FacebookSocialiteController::class, 'handleCallback']);
+
+// LINKEDIN LOGIN ROUTE
+Route::get('auth/linkedin', [LinkedinSocialiteController::class, 'redirectToLinkedin'])->name('frontend.auth.linkedin');
+Route::get('callback/linkedin', [LinkedinSocialiteController::class, 'handleCallback']);
 
 
 // <<============ ALL ROUTE FOR ADMIN ===============>>

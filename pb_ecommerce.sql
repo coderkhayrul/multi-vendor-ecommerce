@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 30, 2022 at 10:00 PM
+-- Generation Time: Jun 01, 2022 at 09:05 PM
 -- Server version: 8.0.29-0ubuntu0.20.04.3
 -- PHP Version: 7.4.3
 
@@ -49,7 +49,8 @@ INSERT INTO `categories` (`id`, `category_name`, `category_slug`, `category_desc
 (33, 'Camera', 'camera', NULL, 'category1653885890.jpg', 1, '2022-05-29 22:44:50', '2022-05-29 22:44:50'),
 (34, 'Monitor', 'monitor', NULL, 'category1653885901.png', 1, '2022-05-29 22:45:01', '2022-05-29 22:45:01'),
 (35, 'Tv', 'tv', NULL, 'category1653885908.png', 1, '2022-05-29 22:45:08', '2022-05-29 22:45:08'),
-(36, 'Ups', 'ups', NULL, 'category1653885914.png', 1, '2022-05-29 22:45:14', '2022-05-29 22:45:14');
+(36, 'Ups', 'ups', NULL, 'category1653885914.png', 1, '2022-05-29 22:45:14', '2022-05-29 22:45:14'),
+(37, 'Toy', 'toy', NULL, '', 1, '2022-05-31 14:39:20', '2022-05-31 14:39:20');
 
 -- --------------------------------------------------------
 
@@ -93,7 +94,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2022_05_28_202827_create_sliders_table', 1),
 (8, '2022_05_29_170227_create_products_table', 1),
 (9, '2022_05_29_174533_create_vendors_table', 1),
-(10, '2022_05_30_063421_create_product_galleries_table', 2);
+(10, '2022_05_30_063421_create_product_galleries_table', 2),
+(11, '2022_06_01_193749_add_social_login_field', 3);
 
 -- --------------------------------------------------------
 
@@ -146,7 +148,7 @@ CREATE TABLE `products` (
   `product_long_des` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_thumbnails` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_quantity` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -156,9 +158,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `vendor_id`, `category_id`, `sub_category_id`, `product_name`, `product_slug`, `product_code`, `product_price`, `product_discount`, `product_discount_price`, `product_short_des`, `product_long_des`, `product_thumbnails`, `product_quantity`, `product_status`, `created_at`, `updated_at`) VALUES
-(10, 3, 31, 1, 'Lane Reid', 'lane-reid', '629526c7637f4', '735', '18', '677', 'Sed veniam consequa', 'Dolor sit modi dolo', '1653941959_9021107.jpg', '590', '1', '2022-05-30 14:19:19', '2022-05-30 14:19:25'),
-(11, 3, 33, 10, 'Zephania Aguirre', 'zephania-aguirre', '629531a5e179f', '147', '94', '489', 'Velit debitis qui f', 'Labore et ad quod ve', '1653944741_3873977.png', '905', '1', '2022-05-30 15:05:41', '2022-05-30 15:05:41'),
-(12, 4, 31, 1, 'Paloma Wallace', 'paloma-wallace', '629539aca492c', '7', '54', '722', 'Nulla aliquam sint', 'Voluptatem in proide', '1653946796_1035138.png', '956', '1', '2022-05-30 15:39:56', '2022-05-30 15:39:56');
+(10, 3, 31, 1, 'Lane Reid working', 'lane-reid-working', '629526c7637f4', '73575', '1855555', '677', 'Sed veniam consequa', 'Dolor sit modi dolo', '1654023643_8290438.png', '590', '1', '2022-05-30 14:19:19', '2022-05-31 13:02:55'),
+(12, 4, 31, 1, 'Paloma Wallace', 'paloma-wallace', '629664f267a0a', '7', '54', '722', 'Nulla aliquam sint', 'Voluptatem in proide', '1653946796_1035138.png', '956', '1', '2022-05-30 15:39:56', '2022-05-31 12:56:50'),
+(13, 3, 33, 1, 'Zephania Aguirre', 'zephania-aguirre', '62961a258d403', '147', '94', '489', 'Velit debitis qui f', 'Labore et ad quod ve', '1654004261_6440309.png', '905', '1', '2022-05-31 07:37:41', '2022-05-31 07:37:41'),
+(14, 4, 35, 22, 'Trevor Ayers', 'trevor-ayers', '62961e4fddba9', '704', '30', '983', NULL, NULL, '1654005327_3352361.jpg', '903', '1', '2022-05-31 07:55:27', '2022-05-31 07:55:27'),
+(15, 3, 34, 17, 'Ryan Sampson', 'ryan-sampson', '62961ec325c44', '206', '12', '75', 'Cumque beatae archit.', 'Placeat, mollit eum .', '1654005443_7744870.jpg', '142', '1', '2022-05-31 07:57:23', '2022-05-31 07:57:28');
 
 -- --------------------------------------------------------
 
@@ -183,7 +187,9 @@ INSERT INTO `product_galleries` (`id`, `product_code`, `image`, `created_at`, `u
 (8, '629526c7637f4', 'PG_4613328.jpg', '2022-05-30 14:19:19', '2022-05-30 14:19:19'),
 (9, '629539aca492c', 'PG_7035131.png', '2022-05-30 15:39:56', '2022-05-30 15:39:56'),
 (10, '629539aca492c', 'PG_2233623.png', '2022-05-30 15:39:56', '2022-05-30 15:39:56'),
-(11, '629539aca492c', 'PG_3547290.png', '2022-05-30 15:39:56', '2022-05-30 15:39:56');
+(11, '629539aca492c', 'PG_3547290.png', '2022-05-30 15:39:56', '2022-05-30 15:39:56'),
+(14, '62961a258d403', 'PG_4411903.png', '2022-05-31 07:37:41', '2022-05-31 07:37:41'),
+(15, '629526c7637f4', 'PG_9778361.png', '2022-05-31 13:00:56', '2022-05-31 13:00:56');
 
 -- --------------------------------------------------------
 
@@ -271,17 +277,22 @@ CREATE TABLE `users` (
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `social_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `social_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `full_name`, `name`, `email`, `role`, `address`, `phone`, `photo`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Khayrul Shanto', 'Admin', 'admin@mail.com', 1, NULL, NULL, NULL, NULL, '$2y$10$xeXw7FNtG1T4cCsZKBr1G.m22DB.TjNyRk6JwcGMSJwS6q/reJVmu', NULL, '2022-05-29 21:49:44', '2022-05-29 21:49:44'),
-(2, 'Berk Garrison', 'Uma Baxter', 'balo@mailinator.com', 2, NULL, NULL, NULL, NULL, '$2y$10$WCg7B6tHvfaaUCfkOtQwfOrGEJqtioVRijUHo4F4mLoZ/Iir1LV4K', NULL, '2022-05-29 22:02:04', '2022-05-29 22:02:04'),
-(3, 'Courtney Thomas', 'Tate Christensen', 'fyzesyd@mailinator.com', 3, NULL, NULL, NULL, NULL, '$2y$10$MuvMYAcDuO0i1TerPChRJuk43o/PH3aMdE9Njmj8Rp0Dj2Oeia82W', NULL, '2022-05-29 22:02:14', '2022-05-29 22:02:14');
+INSERT INTO `users` (`id`, `full_name`, `name`, `email`, `role`, `address`, `phone`, `photo`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `social_id`, `social_type`) VALUES
+(1, 'Admin', 'admin', 'admin@mail.com', 1, NULL, NULL, NULL, NULL, '$2y$10$xeXw7FNtG1T4cCsZKBr1G.m22DB.TjNyRk6JwcGMSJwS6q/reJVmu', NULL, '2022-05-29 21:49:44', '2022-05-29 21:49:44', NULL, NULL),
+(10, 'Quinn Durham', 'Yuli Mcguire', 'muvo@mailinator.com', 1, NULL, NULL, NULL, NULL, '$2y$10$me31RTkTBFNUCmZgz3O6iOFOIsYCPKQRJRbr3TCl.MLNWUkTpVDqu', NULL, '2022-06-01 11:52:22', '2022-06-01 11:52:22', NULL, NULL),
+(11, 'Jeanette Hansen', 'Boris Dale', 'jurojeriva@mailinator.com', 3, NULL, NULL, NULL, NULL, '$2y$10$NX9lwrhBrLNxExl/DHY8T.wccf.xMfjWjPzsY/djP3wfCbzcCAAaC', NULL, '2022-06-01 11:53:12', '2022-06-01 11:53:12', NULL, NULL),
+(13, 'User', 'user', 'user@mail.com', 3, NULL, NULL, NULL, NULL, '$2y$10$.QKjZTUq1ThrAdbhvCKQpuPLsBUNmjYFbmC1NOoM7JE9YsK91u7Tm', NULL, '2022-06-01 12:05:42', '2022-06-01 12:05:42', NULL, NULL),
+(15, 'Khayrul Shanto', 'Khayrul Shanto', 'khayrulshanto@gmail.com', 3, NULL, NULL, NULL, NULL, 'eyJpdiI6InBNdklKbVRpZlZRZFE3RnA1LzBtdmc9PSIsInZhbHVlIjoiSmkya0M3VXJBT2xrZFVQZitwRnhlZz09IiwibWFjIjoiNTExYWEwN2QyNGZlMWJiYTdiNGY1NjRkYThiZTcyZmE0NTlhYTVmZTgxYzRlZTA5MzNhOWY2MTk4NjM1NDZiMiIsInRhZyI6IiJ9', NULL, '2022-06-01 14:34:48', '2022-06-01 14:34:48', '7554523647954748', 'facebook'),
+(16, 'Khayrul Islam Shanto', 'Khayrul Islam Shanto', 'coderkhayrul@gmail.com', 3, NULL, NULL, NULL, NULL, 'eyJpdiI6Ii8rVW8wWXZhaU9iTk5qUXFDSGN4c2c9PSIsInZhbHVlIjoiV1JlVzZmQVRzdCt3VklLWHVrdXB2UT09IiwibWFjIjoiM2MyZTFhZTM2ZjlmYWM4MDQ1Y2RmNzdiN2JiZTllMWY4YjZjMGViN2NhZTQwNDc4NzNlNjQxMTFhM2QzNjIzMiIsInRhZyI6IiJ9', NULL, '2022-06-01 15:02:49', '2022-06-01 15:02:49', 'RDUvVyOlmS', 'linkedin');
 
 -- --------------------------------------------------------
 
@@ -397,7 +408,7 @@ ALTER TABLE `vendors`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -409,7 +420,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -421,13 +432,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `product_galleries`
 --
 ALTER TABLE `product_galleries`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `sliders`
@@ -445,7 +456,7 @@ ALTER TABLE `sub_categories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `vendors`
