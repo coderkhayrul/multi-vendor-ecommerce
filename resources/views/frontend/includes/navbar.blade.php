@@ -150,7 +150,9 @@
                                     </li>
                                 </ul>
                             </li>
-
+                            <li>
+                                <a href="{{ route('frontend.vendor') }}">Vendor</a>
+                            </li>
                             <li>
                                 <a href="blog-category-grid.html">Blog</a>
                             </li>

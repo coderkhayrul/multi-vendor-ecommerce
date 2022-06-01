@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\Vendor;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -15,11 +18,20 @@ class FrontendController extends Controller
     }
 
     public function user_login(){
-        return view('frontend.login');
+
+        if(Auth::user()->role == 3){
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }else{
+            return view('frontend.login');
+        }
     }
 
     public function user_register(){
-        return view('frontend.register');
+        if(Auth::user()->role == 3){
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }else{
+            return view('frontend.register');
+        }
     }
 
     public function purchase_guide(){
@@ -30,5 +42,10 @@ class FrontendController extends Controller
     }
     public function contact(){
         return view('frontend.contact');
+    }
+
+    public function vendor(){
+        $vendors = Vendor::orderBy('id', 'asc')->get();
+        return view('frontend.vendor', compact('vendors'));
     }
 }

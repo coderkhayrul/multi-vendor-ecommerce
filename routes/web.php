@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\SocialLoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,11 @@ Route::get('/user-register', [FrontendController::class, 'user_register'])->name
 Route::get('/purchase-guide', [FrontendController::class, 'purchase_guide'])->name('frontend.purchase_guide');
 Route::get('/about-us', [FrontendController::class, 'about_us'])->name('frontend.about_us');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
+Route::get('/vendor', [FrontendController::class, 'vendor'])->name('frontend.vendor');
+
+// google Social Login
+Route::get('/gotogoogle',[SocialLoginController::class,'gotogoogle'])->name('gotogoogle');
+Route::get('/google/login',[SocialLoginController::class,'googleinfostore']);
 
 
 // <<============ ALL ROUTE FOR ADMIN ===============>>

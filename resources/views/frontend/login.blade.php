@@ -56,6 +56,7 @@
                                             <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Log in</button>
                                         </div>
                                     </form>
+                                    <a href="{{ route('gotogoogle') }}" class="btn btn-success">Google</a>
                                 </div>
                             </div>
                         </div>

@@ -55,7 +55,7 @@ class VendorController extends Controller
         if ($request->hasFile('vendor_image')) {
             $image = $request->file('vendor_image');
             $imageName = 'vendor' . time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->resize(250, 250)->save('backend/uploads/vendor/' . $imageName);
+            Image::make($image)->resize(180, 180)->save('backend/uploads/vendor/' . $imageName);
         }else{
             $imageName = '';
         }
@@ -137,7 +137,7 @@ class VendorController extends Controller
 
             $image = $request->file('vendor_image');
             $imageName = 'vendor' . time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->resize(250, 250)->save('backend/uploads/vendor/' . $imageName);
+            Image::make($image)->resize(180, 180)->save('backend/uploads/vendor/' . $imageName);
         }else{
             $imageName = $data->vendor_image;
         }
