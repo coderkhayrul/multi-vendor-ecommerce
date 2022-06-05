@@ -62,7 +62,7 @@ class ProductController extends Controller
         if ($request->hasFile('product_thumbnails')) {
             $product_image = $request->file('product_thumbnails');
             $imageName = time() . '_' . rand(100000, 10000000) . '.' . $product_image->getClientOriginalExtension();
-            Image::make($product_image)->resize(120, 120)->save('backend/uploads/product/' . $imageName);
+            Image::make($product_image)->resize(1100, 1100)->save('backend/uploads/product/' . $imageName);
 
             Product::create([
                 'vendor_id' => $request->vendor_id,
@@ -87,7 +87,7 @@ class ProductController extends Controller
             $gallery_image = $request->file('image');
             foreach($gallery_image as $image){
                 $multi_imageName = 'PG' . '_' . rand(100000, 10000000) . '.' . $image->getClientOriginalExtension();
-                Image::make($image)->resize(120, 120)->save('backend/uploads/product/gallery/' . $multi_imageName);
+                Image::make($image)->resize(1100, 1100)->save('backend/uploads/product/gallery/' . $multi_imageName);
                 ProductGallery::create([
                     'product_code' => $uniq_product_code,
                     'image' => $multi_imageName,
@@ -153,7 +153,7 @@ class ProductController extends Controller
 
             $product_image = $request->file('product_thumbnails');
             $imageName = time() . '_' . rand(100000, 10000000) . '.' . $product_image->getClientOriginalExtension();
-            Image::make($product_image)->resize(120, 120)->save('backend/uploads/product/' . $imageName);
+            Image::make($product_image)->resize(1100, 1100)->save('backend/uploads/product/' . $imageName);
         }else{
             $imageName = $product->product_thumbnails;
         }
@@ -179,7 +179,7 @@ class ProductController extends Controller
             $gallery_image = $request->file('image');
             foreach($gallery_image as $image){
                 $multi_imageName = 'PG' . '_' . rand(100000, 10000000) . '.' . $image->getClientOriginalExtension();
-                Image::make($image)->resize(120, 120)->save('backend/uploads/product/gallery/' . $multi_imageName);
+                Image::make($image)->resize(1100, 1100)->save('backend/uploads/product/gallery/' . $multi_imageName);
                 ProductGallery::create([
                     'product_code' => $product->product_code,
                     'image' => $multi_imageName,
