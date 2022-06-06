@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AddToCartController;
 use App\Http\Controllers\Backend\VendorController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
@@ -11,7 +12,6 @@ use App\Http\Controllers\GoogleSocialiteController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\LinkedinSocialiteController;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 // <<============ ALL ROUTE FOR HOME ===============>>
 Route::get('/', [FrontendController::class, 'home'])->name('frontend.home');
+Route::get('/test', [FrontendController::class, 'test'])->name('frontend.test');
 
 Route::get('/user-login', [FrontendController::class, 'user_login'])->name('frontend.user_login');
 Route::get('/user-register', [FrontendController::class, 'user_register'])->name('frontend.user_register');
@@ -34,6 +35,12 @@ Route::get('/purchase-guide', [FrontendController::class, 'purchase_guide'])->na
 Route::get('/about-us', [FrontendController::class, 'about_us'])->name('frontend.about_us');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
 Route::get('/vendor', [FrontendController::class, 'vendor'])->name('frontend.vendor');
+
+// CART ROUTE LIST
+Route::get('add-to-cart/{slug}', [AddToCartController::class, 'addtocart'])->name('frontend.addtocart');
+Route::get('cart/remove/{id}', [AddToCartController::class, 'cartremove'])->name('frontend.cart.remove');
+Route::get('shopping/cart', [AddToCartController::class, 'shoppingcart'])->name('frontend.shopping.cart');
+
 
 // GOOGLE LOGIN ROUTE
 Route::get('auth/google', [GoogleSocialiteController::class, 'redirectToGoogle'])->name('frontend.auth.google');
@@ -125,4 +132,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     });
 });
+
+
 require __DIR__.'/auth.php';

@@ -9,9 +9,14 @@ use App\Models\Vendor;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 class FrontendController extends Controller
 {
+    public function test(){
+        $addcartList = Cart::getContent();
+        return $addcartList;
+    }
+
     public function user_login(){
         if (Auth::check()) {
             return redirect()->route('frontend.home');

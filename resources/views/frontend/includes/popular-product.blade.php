@@ -63,7 +63,7 @@
                                         <span class="old-price">${{ $product->product_price }}</span>
                                     </div>
                                     <div class="add-cart">
-                                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add" href="{{ route('frontend.addtocart',$product->product_slug) }}"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                     </div>
                                 </div>
                             </div>
@@ -81,38 +81,26 @@
                                             <div class="detail-gallery">
                                                 <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                                 <!-- MAIN SLIDES -->
+                                                @php
+                                                    $productgel = App\Models\ProductGallery::where('product_code', $product->product_code)->get();
+                                                @endphp
                                                 <div class="product-image-slider">
                                                     <figure class="border-radius-10">
-                                                        <img src="{{ asset('frontend') }}/imgs/shop/product-16-2.jpg" alt="product image">
+                                                        <img src="{{ asset('backend/uploads/product/'.$product->product_thumbnails) }}" alt="product image">
                                                     </figure>
+                                                    @foreach ($productgel as $pg)
                                                     <figure class="border-radius-10">
-                                                        <img src="{{ asset('frontend') }}/imgs/shop/product-16-1.jpg" alt="product image">
+                                                        <img src="{{ asset('backend/uploads/product/gallery/'.$pg->image) }}" alt="product image">
                                                     </figure>
-                                                    <figure class="border-radius-10">
-                                                        <img src="{{ asset('frontend') }}/imgs/shop/product-16-3.jpg" alt="product image">
-                                                    </figure>
-                                                    <figure class="border-radius-10">
-                                                        <img src="{{ asset('frontend') }}/imgs/shop/product-16-4.jpg" alt="product image">
-                                                    </figure>
-                                                    <figure class="border-radius-10">
-                                                        <img src="{{ asset('frontend') }}/imgs/shop/product-16-5.jpg" alt="product image">
-                                                    </figure>
-                                                    <figure class="border-radius-10">
-                                                        <img src="{{ asset('frontend') }}/imgs/shop/product-16-6.jpg" alt="product image">
-                                                    </figure>
-                                                    <figure class="border-radius-10">
-                                                        <img src="{{ asset('frontend') }}/imgs/shop/product-16-7.jpg" alt="product image">
-                                                    </figure>
+                                                    @endforeach
                                                 </div>
                                                 <!-- THUMBNAILS -->
                                                 <div class="slider-nav-thumbnails">
-                                                    <div><img src="{{ asset('frontend') }}/imgs/shop/thumbnail-3.jpg" alt="product image"></div>
-                                                    <div><img src="{{ asset('frontend') }}/imgs/shop/thumbnail-4.jpg" alt="product image"></div>
-                                                    <div><img src="{{ asset('frontend') }}/imgs/shop/thumbnail-5.jpg" alt="product image"></div>
-                                                    <div><img src="{{ asset('frontend') }}/imgs/shop/thumbnail-6.jpg" alt="product image"></div>
-                                                    <div><img src="{{ asset('frontend') }}/imgs/shop/thumbnail-7.jpg" alt="product image"></div>
-                                                    <div><img src="{{ asset('frontend') }}/imgs/shop/thumbnail-8.jpg" alt="product image"></div>
-                                                    <div><img src="{{ asset('frontend') }}/imgs/shop/thumbnail-9.jpg" alt="product image"></div>
+                                                    <div><img src="{{ asset('backend/uploads/product/'.$product->product_thumbnails) }}" alt="product image"></div>
+
+                                                    @foreach ($productgel as $pg)
+                                                    <div><img src="{{ asset('backend/uploads/product/gallery/'.$pg->image) }}" alt="product image"></div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                             <!-- End Gallery -->
@@ -150,7 +138,7 @@
                                                 </div>
                                                 <div class="font-xs">
                                                     <ul>
-                                                        <li class="mb-5">Vendor: <span class="text-brand">Nest</span></li>
+                                                        <li class="mb-5">Vendor: <span class="text-brand">{{ $product->vendor->vendor_name }}</span></li>
                                                         <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2022</span></li>
                                                     </ul>
                                                 </div>
@@ -167,8 +155,8 @@
                 </div>
                 <!--End product-grid-4-->
             </div>
-
             <!--En tab one-->
+
             @foreach ($categories as $category)
             @php
                 $products = App\Models\Product::where('category_id', $category->id)->get();
@@ -182,7 +170,7 @@
                                 <div class="product-img product-img-zoom">
                                     <a href="shop-product-right.html">
                                         <img class="default-img" src="{{ asset('backend/uploads/product/'.$product->product_thumbnails) }}" alt="">
-                                        <img class="hover-img" src="{{ asset('frontend') }}/imgs/shop/product-10-2.jpg" alt="">
+                                        <img class="hover-img" src="{{ asset('backend/uploads/product/'.$product->product_thumbnails) }}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-action-1">
