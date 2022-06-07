@@ -41,6 +41,9 @@ Route::get('add-to-cart/{slug}', [AddToCartController::class, 'addtocart'])->nam
 Route::get('cart/remove/{id}', [AddToCartController::class, 'cartremove'])->name('frontend.cart.remove');
 Route::get('shopping/cart', [AddToCartController::class, 'shoppingcart'])->name('frontend.shopping.cart');
 
+// USER PROFILE ROUTE LIST
+Route::get('user-profile', [FrontendController::class, 'userprofile'])->name('frontend.user.profie');
+
 
 // GOOGLE LOGIN ROUTE
 Route::get('auth/google', [GoogleSocialiteController::class, 'redirectToGoogle'])->name('frontend.auth.google');
@@ -56,7 +59,7 @@ Route::get('callback/linkedin', [LinkedinSocialiteController::class, 'handleCall
 
 
 // <<============ ALL ROUTE FOR ADMIN ===============>>
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
     Route::get('/',[ AdminController::class, 'dashboard' ])->name('admin.dashboard');
 
      // VENDOY ROUTE LIST

@@ -5,19 +5,13 @@
                 <div class="header-info">
                     <ul>
                         <li><a href="{{ route('frontend.about_us') }}">About Us</a></li>
-                        @auth
-                            @if (Auth::user()->role == 3)
-                            <li><a href="#">My Account</a></li>
+                        <li>
+                            @if (Auth::check())
+                            <a href="{{ route('frontend.user.profie') }}">My Account</a>
                             @else
-                            <li><a href="{{ route('frontend.user_login') }}">Login</a></li>
-                            <li><a href="{{ route('frontend.user_register') }}">Register</a></li>
+                            <a href="{{ route('frontend.user_login') }}">My Account</a>
                             @endif
-                        @endauth
-                        @guest
-                            <li><a href="{{ route('frontend.user_login') }}">Login</a></li>
-                            <li><a href="{{ route('frontend.user_register') }}">Register</a></li>
-                        @endguest
-
+                        </li>
                         <li><a href="#">Wishlist</a></li>
                         <li><a href="#">Order Tracking</a></li>
                     </ul>

@@ -222,60 +222,47 @@
                                         </div>
                                     </div>
                                 </div>
-                                @auth
-                                    @if (Auth::user()->role == 3)
-                                    <div class="header-action-icon-2">
-                                        <a href="#">
-                                            <img class="svgInject" alt="Nest" src="{{ asset('frontend') }}/imgs/theme/icons/icon-user.svg">
-                                        </a>
-                                        <a href="#"><span class="lable ml-0">Account</span></a>
-                                        <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
-                                            <ul>
-                                                <li>
-                                                    <a href="#"><i class="fi fi-rs-user mr-10"></i>My Account</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
-                                                </li>
-                                                <li>
-                                                    <a onclick="event.preventDefault(); document.getElementById('form-logout').submit();" href="{{ route('logout') }}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
-                                                    {{-- Logout Form --}}
-                                                    <form id="form-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                        {{ csrf_field() }}
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                <div class="header-action-icon-2">
+                                    <a href="#">
+                                        <img class="svgInject" alt="Nest" src="{{ asset('frontend') }}/imgs/theme/icons/icon-user.svg">
+                                    </a>
+                                    <a href="#"><span class="lable ml-0">Account</span></a>
+                                    <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
+                                        <ul>
+                                            @if (Auth::check())
+                                            <li>
+                                                <a href="{{ route('frontend.user.profie') }}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="event.preventDefault(); document.getElementById('form-logout').submit();" href="{{ route('logout') }}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
+                                                {{-- Logout Form --}}
+                                                <form id="form-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                </form>
+                                            </li>
+                                            @else
+                                            <li>
+                                                <a href="{{ route('frontend.user_login') }}"><i class="fi fi-rs-sign-in mr-10"></i>Login</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('frontend.user_register') }}"><i class="fi fi-rs-user-add mr-10"></i>Register</a>
+                                            </li>
+                                            @endif
+                                        </ul>
                                     </div>
-                                    @else
-                                    <div class="header-action-icon-2">
-                                        <a href="page-account.html">
-                                            <img class="svgInject" alt="Nest" src="{{ asset('frontend') }}/imgs/theme/icons/icon-user.svg">
-                                        </a>
-                                        <a href="{{ route('frontend.user_login') }}"><span class="lable ml-0">Login</span></a>
-                                    </div>
-                                    @endif
-                                @endauth
-                                @guest
-                                    <div class="header-action-icon-2">
-                                        <a href="page-account.html">
-                                            <img class="svgInject" alt="Nest" src="{{ asset('frontend') }}/imgs/theme/icons/icon-user.svg">
-                                        </a>
-                                        <a href="{{ route('frontend.user_login') }}"><span class="lable ml-0">Login</span></a>
-                                    </div>
-                                @endguest
-
-
-
+                                </div>
                             </div>
                         </div>
                     </div>

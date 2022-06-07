@@ -53,4 +53,9 @@ class FrontendController extends Controller
         $vendors = Vendor::orderBy('id', 'asc')->get();
         return view('frontend.vendor', compact('vendors'));
     }
+
+    // USER PROFILE METHORD
+    public function userprofile(){
+        return view('frontend.user_profile');
+    }
 }

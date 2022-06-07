@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use Illuminate\Support\Facades\Session;
+
 class AddToCartController extends Controller
 {
     public function addtocart($slug){
         $product = Product::where('product_slug', $slug)->first();
 
-        Cart::add([
+        $cart = Cart::add([
             'id' => $product->id,
             'name' => $product->product_name,
             'price' => $product->product_discount_price,

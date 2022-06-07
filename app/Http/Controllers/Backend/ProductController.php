@@ -187,7 +187,7 @@ class ProductController extends Controller
                 ]);
             }
         }
-        Session::flash('success', 'Product Create Successfully');
+        Session::flash('success', 'Product Update Successfully');
         return redirect()->back();
     }
 
