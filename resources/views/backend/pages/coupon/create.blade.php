@@ -42,7 +42,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label">Coupon Amount: <span class="tx-danger">*</span></label>
-                            <input value="{{ old('coupon_amount') }}" class="form-control" type="text" name="coupon_amount" placeholder="Coupon Amount">
+                            <input value="{{ old('coupon_amount') }}" class="form-control" type="number" name="coupon_amount" placeholder="Coupon Amount">
                             @error('coupon_amount')
                                 <div class="text-danger">
                                     {{ $message }}

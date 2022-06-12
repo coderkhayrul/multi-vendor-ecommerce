@@ -3,108 +3,68 @@
 
 <div class="card">
     <div class="card-header">
-        <p style="float:left" class="d-inline mb-0">Slider Edit</p>
-        <a style="float:right" class="d-inline btn btn-sm btn-primary" href="{{ route('slider.index') }}">All
-            Slider</a>
+        <p style="float:left" class="d-inline mb-0">Coupon Edit</p>
+        <a style="float:right" class="d-inline btn btn-sm btn-primary" href="{{ route('coupon.index') }}">All
+            Coupon</a>
     </div>
     <div class="card-body">
-
-        @if (Session::has('success'))
-            <div class="alert alert-success" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <strong class="d-block d-sm-inline-block-force">{{ Session::get('success') }}</strong>
-            </div>
-        @endif
-        @if (Session::has('error'))
-            <div class="alert alert-danger" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <strong class="d-block d-sm-inline-block-force">{{ Session::get('error') }}</strong>
-            </div>
-        @endif
-
-        <form action="{{ route('slider.update',$data->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('coupon.update',$data->id) }}" method="post">
             @csrf
             @method('PUT')
+            <input value="{{ Auth::user()->id }}" class="form-control" type="hidden" name="coupon_editor">
+
             <div class="form-layout form-layout-1">
                 <div class="row mg-b-25">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label">Slider Title: <span class="tx-danger">*</span></label>
-                            <input value="{{ $data->slider_title }}" class="form-control" type="text" name="slider_title" placeholder="Slider Title">
-                            @error('slider_title')
+                            <label class="form-control-label">Coupon Code: <span class="tx-danger">*</span></label>
+                            <input value="{{ $data['coupon_code'] }}" class="form-control" type="text" name="coupon_code" placeholder="Coupon Code" required>
+                            @error('coupon_code')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                    </div>
-                    <!-- col-4 -->
+                    </div><!-- col-4 -->
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label">Slider Link: <span class="tx-danger">*</span></label>
-                            <input value="{{ $data->slider_link }}" class="form-control" type="text" name="slider_link" placeholder="Slider Link">
-                            @error('slider_link')
+                            <label class="form-control-label">Coupon Amount: <span class="tx-danger">*</span></label>
+                            <input value="{{ $data['coupon_amount'] }}" class="form-control" type="number" name="coupon_amount" placeholder="Coupon Amount">
+                            @error('coupon_amount')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                    </div>
-                    <!-- col-4 -->
+                    </div><!-- col-4 -->
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <div class="form-group mg-b-10-force">
-                            <label class="form-control-label">Slider Image: <span class="tx-danger">*</span></label>
-                            <input id="slider_image_input" type="file" class="form-control" name="slider_image">
-                            @error('slider_image')
+                            <label class="form-control-label">Coupon Quantity: <span class="tx-danger">*</span></label>
+                            <input value="{{ $data['coupon_quantity'] }}" type="number" class="form-control" name="coupon_quantity" placeholder="Coupon Amount">
+                            @error('coupon_quantity')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div><!-- col-4 -->
                     </div>
-                    <div class="col-lg-4">
-                        <div class="form-group mg-b-10-force text-center">
-                            @if ($data->slider_image)
-                                <img id="slider_image_preview" class=" img-fluid rounded wd-100" src="{{ asset('backend/uploads/slider/'.$data->slider_image) }}"
-                                alt="slider_image">
-                            @else
-                                <img id="slider_image_preview" class=" img-fluid rounded wd-80" src="{{ asset('backend/default/no-image-pro.png') }}"
-                                alt="slider">
-                            @endif
-                        </div><!-- col-4 -->
-                    </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="form-group mg-b-10-force">
-                            <label class="form-control-label">Description: <span class="tx-danger">*</span></label>
-                            <textarea class="form-control" name="slider_description" id="" >{{ $data->slider_description }}</textarea>
-                            @error('slider_description')
+                            <label class="form-control-label">Coupon Expire Date: <span class="tx-danger">*</span></label>
+                            <input  value="{{ $data['coupon_exp_date'] }}" type="date" class="form-control" name="coupon_exp_date">
+                            @error('coupon_exp_date')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
-                        </div>
-                    </div><!-- col-8 -->
+                        </div><!-- col-4 -->
+                    </div>
                     <div class="form-layout-footer">
-                        <button class="ml-3 btn btn-info">Update Slider</button>
+                        <button class="ml-3 btn btn-info">Update Coupon</button>
                     </div><!-- form-layout-footer -->
                 </div>
             </div>
         </form>
     </div>
-<!-- Custom Image Upload Preview -->
-<script type="text/javascript">
-    // Main Logo
-    $('#slider_image_input').change(function(){
-    let reader = new FileReader();
-    reader.onload = (e) => {
-        $('#slider_image_preview').attr('src', e.target.result);
-    }
-    reader.readAsDataURL(this.files[0]);
-    });
-</script>
     @endsection

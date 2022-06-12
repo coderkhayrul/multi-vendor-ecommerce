@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CouponController extends Controller
 {
@@ -14,7 +18,8 @@ class CouponController extends Controller
      */
     public function index()
     {
-        //
+        $coupons = Coupon::where('coupon_status', 1)->get();
+        return view('backend.pages.coupon.index', compact('coupons'));
     }
 
     /**
@@ -35,7 +40,28 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'coupon_code' => 'required',
+            'coupon_amount' => 'required',
+            'coupon_quantity' => 'required',
+            'coupon_exp_date' => 'required',
+        ]);
+
+        $coupon = Coupon::create([
+            'coupon_code' => $request->coupon_code,
+            'coupon_amount' => $request->coupon_amount,
+            'coupon_quantity' => $request->coupon_quantity,
+            'coupon_exp_date' => Carbon::parse($request->coupon_exp_date),
+            'coupon_creator' => Auth::user()->id,
+            'created_at' => Carbon::now()->toDateTimeString(),
+        ]);
+        if ($coupon) {
+            Session::flash('success', "Coupon Create Successfully!");
+            return redirect()->back();
+        }else{
+            Session::flash('error', "Coupon Create Failed!");
+            return redirect()->back();
+        }
     }
 
     /**
@@ -57,7 +83,8 @@ class CouponController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Coupon::find($id);
+        return view('backend.pages.coupon.edit', compact('data'));
     }
 
     /**
@@ -69,7 +96,28 @@ class CouponController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'coupon_code' => 'required',
+            'coupon_amount' => 'required',
+            'coupon_quantity' => 'required',
+            'coupon_exp_date' => 'required',
+        ]);
+
+        $coupon = Coupon::where('id', $id)->update([
+            'coupon_code' => $request->coupon_code,
+            'coupon_amount' => $request->coupon_amount,
+            'coupon_quantity' => $request->coupon_quantity,
+            'coupon_exp_date' => Carbon::parse($request->coupon_exp_date),
+            'coupon_editor' => $request->coupon_editor,
+            'updated_at' => Carbon::now()->toDateTimeString(),
+        ]);
+        if ($coupon) {
+            Session::flash('success', "Coupon Update Successfully!");
+            return redirect()->route('coupon.index');
+        }else{
+            Session::flash('error', "Coupon Update Failed!");
+            return redirect()->route('coupon.index');
+        }
     }
 
     /**
