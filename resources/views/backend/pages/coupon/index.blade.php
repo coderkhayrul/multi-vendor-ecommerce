@@ -39,18 +39,18 @@
                         </tr>
                     </thead>
                     <tbody class="text-alian-center">
+                        @php
+                            $current_date = date('d/m/y', strtotime(Carbon\Carbon::now()));
+                            // date('d-M-Y', strtotime($data->coupon_exp_date))
+                            @endphp
                         @foreach ($coupons as $data)
                         <tr>
                             <td width="10%">{{ $data['coupon_code'] }}</td>
                             <td width="10%">{{ $data['coupon_amount'] }}</td>
                             <td width="10%">{{ $data['coupon_quantity'] }}</td>
                             <td width="10%">
-                                @if ($data['coupon_exp_date'])
-                                <span class="badge badge-success">{{  date('d-M-Y', strtotime($data->coupon_exp_date)) }}</span>
-
-                                @else
-                                <span class="badge badge-danger">Coupon Expire</span>
-                                @endif
+                                <span class="badge badge-success">{{ $data->created_at->diffForHumans() }}</span>
+                                {{-- <span class="badge badge-success">{{  date('d-M-Y', strtotime($data->coupon_exp_date)) }}</span> --}}
                             </td>
                             <td width="20%" class="text-center">
                                 <div class="dropdown">
@@ -139,7 +139,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group mg-b-10-force">
                                     <label class="form-control-label">Coupon Expire Date: <span class="tx-danger">*</span></label>
-                                    <input  value="{{ old('coupon_exp_date') }}" type="date" class="form-control" name="coupon_exp_date">
+                                    <input  value="{{ old('coupon_exp_date') }}" type="datetime-local" class="form-control" name="coupon_exp_date">
                                     @error('coupon_exp_date')
                                         <div class="text-danger">
                                             {{ $message }}

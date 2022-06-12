@@ -128,6 +128,13 @@ class CouponController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $coupon = Coupon::where('id', $id)->delete();
+        if ($coupon) {
+            Session::flash('success', "Coupon Delete Successfully!");
+            return redirect()->route('coupon.index');
+        }else{
+            Session::flash('error', "Coupon Delete Failed!");
+            return redirect()->route('coupon.index');
+        }
     }
 }
