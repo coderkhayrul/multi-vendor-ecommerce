@@ -8,6 +8,9 @@ use App\Library\SslCommerz\SslCommerzNotification;
 
 class SslCommerzPaymentController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
     public function exampleEasyCheckout()
     {
@@ -16,7 +19,7 @@ class SslCommerzPaymentController extends Controller
 
     public function exampleHostedCheckout()
     {
-        return view('frontend.exampleHosted');
+        return view('frontend.checkout');
     }
 
     public function index(Request $request)

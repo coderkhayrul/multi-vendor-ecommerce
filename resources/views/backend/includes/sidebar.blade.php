@@ -95,11 +95,30 @@
                     <a href="{{ route('product.index') }}" class="sub-link {{ Route::currentRouteName() == 'product.index' ? 'active' : '' }}">All Product</a>
                 </li>
                 <li class="sub-item">
-                    <a href="{{ route('product.create') }}" class="sub-link {{ Route::currentRouteName() == 'product.create' ? 'active' : '' }}">Add Create</a>
+                    <a href="{{ route('product.create') }}" class="sub-link {{ Route::currentRouteName() == 'product.create' ? 'active' : '' }}">Add Product</a>
                 </li>
             </ul>
         </li>
         <!-- Product Route End -->
+
+        <!-- Coupon Route Start -->
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{ request()->is('admin/coupon*') ? 'active' : '' }}">
+                <i class="menu-item-icon icon ion-filing tx-20"></i>
+                <span class="menu-item-label">Coupon</span>
+            </a>
+            <!-- br-menu-link -->
+            <ul class="br-menu-sub">
+                <li class="sub-item">
+                    <a href="{{ route('coupon.index') }}" class="sub-link {{ Route::currentRouteName() == 'coupon.index' ? 'active' : '' }}">All Coupon</a>
+                </li>
+                <li class="sub-item">
+                    <a href="{{ route('coupon.create') }}" class="sub-link {{ Route::currentRouteName() == 'coupon.create' ? 'active' : '' }}">Add Coupon</a>
+                </li>
+            </ul>
+        </li>
+        <!-- Coupon Route End -->
+
         <!-- Visite Website -->
         <li class="br-menu-item">
             <a href="{{ route('frontend.home') }}" class="br-menu-link" target="_blank">

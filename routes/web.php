@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\AddToCartController;
 use App\Http\Controllers\Backend\VendorController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
@@ -26,20 +27,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 // SSLCOMMERZ Start
-Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
-Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
 
-Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
-Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
-
-Route::post('/success', [SslCommerzPaymentController::class, 'success']);
-Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
-Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
-
-Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
 
 // <<============ ALL ROUTE FOR HOME ===============>>
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+    Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+    Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+    Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+    Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+    Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+    Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+    Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+
+});
+
 Route::get('/', [FrontendController::class, 'home'])->name('frontend.home');
 Route::get('/test', [FrontendController::class, 'test'])->name('frontend.test');
 
@@ -129,6 +135,20 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
         Route::get('/active/{id}',[ SliderController::class, 'active_status' ])->name('slider.active');
         Route::get('/deactive/{id}',[ SliderController::class, 'deactive_status' ])->name('slider.deactive');
     });
+
+     // COUPON ROUTE LIST
+     Route::group(['prefix' => 'coupon'], function() {
+        Route::get('/',[ CouponController::class, 'index' ])->name('coupon.index');
+        Route::get('/create',[ CouponController::class, 'create' ])->name('coupon.create');
+        Route::post('/',[ CouponController::class, 'store' ])->name('coupon.store');
+        Route::get('/edit/{id}',[ CouponController::class, 'edit' ])->name('coupon.edit');
+        Route::put('/{id}',[ CouponController::class, 'update' ])->name('coupon.update');
+        Route::get('/delete/{id}',[ CouponController::class, 'destroy' ])->name('coupon.destroy');
+
+        Route::get('/active/{id}',[ CouponController::class, 'active_status' ])->name('coupon.active');
+        Route::get('/deactive/{id}',[ CouponController::class, 'deactive_status' ])->name('coupon.deactive');
+    });
+
 
     // PRODUCT ROUTE LIST
     Route::group(['prefix' => 'product'], function() {
