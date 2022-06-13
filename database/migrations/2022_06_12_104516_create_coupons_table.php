@@ -18,9 +18,9 @@ class CreateCouponsTable extends Migration
             $table->string('coupon_code');
             $table->string('coupon_amount');
             $table->integer('coupon_quantity');
-            $table->string('coupon_exp_date');
+            $table->dateTime('coupon_exp_date');
             $table->integer('coupon_creator');
-            $table->integer('coupon_editor');
+            $table->integer('coupon_editor')->nullable();
             $table->integer('coupon_status')->default(1);
             $table->timestamps();
         });

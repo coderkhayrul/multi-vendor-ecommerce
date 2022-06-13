@@ -32,8 +32,7 @@ use Illuminate\Support\Facades\Route;
 
 // <<============ ALL ROUTE FOR HOME ===============>>
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
-    Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+    Route::get('/checkout', [SslCommerzPaymentController::class, 'checkout'])->name('frontend.checkout');
 
     Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
     Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
@@ -137,16 +136,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
     });
 
      // COUPON ROUTE LIST
-     Route::group(['prefix' => 'coupon'], function() {
+    Route::group(['prefix' => 'coupon'], function() {
         Route::get('/',[ CouponController::class, 'index' ])->name('coupon.index');
         Route::get('/create',[ CouponController::class, 'create' ])->name('coupon.create');
         Route::post('/',[ CouponController::class, 'store' ])->name('coupon.store');
         Route::get('/edit/{id}',[ CouponController::class, 'edit' ])->name('coupon.edit');
         Route::put('/{id}',[ CouponController::class, 'update' ])->name('coupon.update');
         Route::get('/delete/{id}',[ CouponController::class, 'destroy' ])->name('coupon.destroy');
-
-        Route::get('/active/{id}',[ CouponController::class, 'active_status' ])->name('coupon.active');
-        Route::get('/deactive/{id}',[ CouponController::class, 'deactive_status' ])->name('coupon.deactive');
     });
 
 

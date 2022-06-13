@@ -17,7 +17,7 @@ class SslCommerzPaymentController extends Controller
         return view('frontend.exampleEasycheckout');
     }
 
-    public function exampleHostedCheckout()
+    public function checkout()
     {
         return view('frontend.checkout');
     }

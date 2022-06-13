@@ -49,8 +49,11 @@
                             <td width="10%">{{ $data['coupon_amount'] }}</td>
                             <td width="10%">{{ $data['coupon_quantity'] }}</td>
                             <td width="10%">
-                                <span class="badge badge-success">{{ $data->created_at->diffForHumans() }}</span>
-                                {{-- <span class="badge badge-success">{{  date('d-M-Y', strtotime($data->coupon_exp_date)) }}</span> --}}
+                                @if (date('d-M-Y', strtotime(Carbon\Carbon::now())) <= date('d-M-Y', strtotime($data->coupon_exp_date)))
+                                <span class="badge badge-success">{{  date('d-M-Y', strtotime($data->coupon_exp_date)) }}</span>
+                                @else
+                                <span class="badge badge-danger">Coupon Expire</span>
+                                @endif
                             </td>
                             <td width="20%" class="text-center">
                                 <div class="dropdown">
