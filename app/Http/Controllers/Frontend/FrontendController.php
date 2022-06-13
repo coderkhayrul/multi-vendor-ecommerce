@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Coupon;
 use App\Models\SubCategory;
 use App\Models\Vendor;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use Illuminate\Support\Carbon;
+
 class FrontendController extends Controller
 {
     public function test(){
@@ -54,8 +57,36 @@ class FrontendController extends Controller
         return view('frontend.vendor', compact('vendors'));
     }
 
-    // USER PROFILE METHORD
+    // User Profile
     public function userprofile(){
         return view('frontend.user_profile');
+    }
+
+    // Coupon Apply
+    public function coupon_apply(Request $request){
+        $this->validate($request,[
+            'coupon_code' => 'required'
+        ]);
+
+        $current_date = date('d-M-Y', strtotime(Carbon::now()));
+        $coupon = Coupon::where('coupon_code', $request->coupon_code)->first();
+        $exp_date = date('d-M-Y', strtotime($coupon->coupon_exp_date));
+        $cart_subTotal = Cart::getSubTotal();
+        // return $cart_subTotal;
+        $update_amount = $cart_subTotal - $coupon->coupon_amount;
+
+        return $update_amount;
+
+        // Cart::update(456, array(
+        //     'name' => 'New Item Name', // new item name
+        //     'price' => 98.67, // new item price, price can also be a string format like so: '98.67'
+        // ));
+
+
+        if ($current_date < $exp_date) {
+            return "Coupon Apply Successfully";
+        }else {
+            return "Coupon Date Expire";
+        }
     }
 }

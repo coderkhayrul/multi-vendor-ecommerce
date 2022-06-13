@@ -42,6 +42,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 
     Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+    // Coupon Apply
+    Route::post('/coupon-apply', [FrontendController::class, 'coupon_apply'])->name('froontend.coupon.apply');
+
+
 
 });
 

@@ -191,6 +191,9 @@
 
 {{-- <<========================  END OF FILE ==========================>> --}}
 
+@php
+    $carts = Cart::getContent()
+@endphp
 @extends('layouts.home_layout')
 @section('home-content')
 <main class="main">
@@ -208,7 +211,7 @@
             <div class="col-lg-8 mb-40">
                 <h1 class="heading-2 mb-10">Checkout</h1>
                 <div class="d-flex justify-content-between">
-                    <h6 class="text-body">There are <span class="text-brand">3</span> products in your cart</h6>
+                    <h6 class="text-body">There are <span class="text-brand">{{ $carts->count() }}</span> products in your cart</h6>
                 </div>
             </div>
         </div>
@@ -245,12 +248,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <form method="post" class="apply-coupon">
-                            <input type="text" placeholder="Enter Coupon Code...">
-                            <button class="btn  btn-md" name="login">Apply Coupon</button>
+                    {{-- <div class="col-lg-6">
+                        <form method="post" class="apply-coupon" action="{{ route('froontend.coupon.apply') }}">
+                            @csrf
+                            <input required name="coupon_code" type="text" placeholder="Enter Coupon Code...">
+                            <button type="submit" class="btn btn-md">Apply Coupon</button>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="row">
                     <h4 class="mb-30">Billing Details</h4>
@@ -424,12 +428,9 @@
                     <div class="table-responsive order_table checkout">
                         <table class="table no-border">
                             <tbody>
-                                @php
-                                    $carts = Cart::getContent()
-                                @endphp
                                 @foreach ($carts as $cart)
                                 <tr>
-                                    <td class="image product-thumbnail"><img src="{{ asset('frontend') }}/imgs/shop/product-1-1.jpg" alt="#"></td>
+                                    <td class="image product-thumbnail"><img src="{{ asset('backend/uploads/product/'.$cart->attributes->image) }}" alt="#"></td>
                                     <td>
                                         <h6 class="w-160 mb-5"><a href="shop-product-full.html" class="text-heading">{{ $cart->name }}</a></h6>
                                         <div class="product-rate-cover">
@@ -441,7 +442,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <h6 class="text-muted pl-20 pr-20">x 1</h6>
+                                        <h6 class="text-muted pl-20 pr-20">x {{ $cart->quantity }}</h6>
                                     </td>
                                     <td>
                                         <h4 class="text-brand">${{ $cart->price }}</h4>
